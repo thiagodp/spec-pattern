@@ -1,9 +1,11 @@
 # spec-pattern
 Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Specification_pattern) for JavaScript and TypeScript.
 
-> Useful for building complex filters or complex checking rules in a easy way.
+> Useful for building complex filters or rules in a easy way.
 
 No external dependencies. Fully tested. Adopts [semantic versioning](https://semver.org). *Forks are welcome!*
+
+[![Build Status](https://travis-ci.org/thiagodp/spec-pattern.svg?branch=master)](https://travis-ci.org/thiagodp/spec-pattern)
 
 ## Install
 
