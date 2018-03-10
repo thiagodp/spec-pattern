@@ -1,0 +1,55 @@
+{
+  "name": "spec-pattern",
+  "version": "1.0.0",
+  "description": "Specification Pattern in TypeScript",
+  "license": "MIT",
+  "author": "Thiago Delgado Pinto",
+  "homepage": "https://github.com/thiagodp/spec-pattern",
+  "repository": {
+    "type": "git",
+    "url": "git://gitlab.com/thiagodp/spec-pattern.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thiagodp/spec-pattern/issues"
+  },
+  "keywords": [
+    "design-pattern",
+    "specification",
+    "specification-pattern",
+    "spec",
+    "pattern",
+    "javascript",
+    "typescript",
+    "node",
+    "ts",
+    "js"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --all",
+    "postversion": "git push && git push --tags"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "./node_modules/",
+      "./dist/"
+    ],
+    "transform": {
+      ".(ts|tsx)": "./node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "^21.1.10",
+    "jest": "^21.2.1",
+    "ts-jest": "^21.2.4",
+    "typescript": "^2.7.1"
+  }
+}
