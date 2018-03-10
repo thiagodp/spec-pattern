@@ -90,6 +90,7 @@ console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
 - `EndsWith_( value: string, ignoreCase: boolean = false )`
 - `Contains_( value: string, ignoreCase: boolean = false )`
 - `LengthBetween_( min: any, max: any )`
+- `Matches_( regex: RegExp )`
 
 All these classes extend the abstract class `Composite_`, which in turn implements the interface `Spec_`:
 
