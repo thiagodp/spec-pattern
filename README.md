@@ -5,6 +5,12 @@ Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Spec
 
 No external dependencies. Fully tested. Adopts [semantic versioning](https://semver.org). *Forks are welcome!*
 
+## Install
+
+```console
+$ npm install spec-pattern --save
+```
+
 ## Examples
 
 #### A simple Between rule
@@ -173,3 +179,7 @@ DifferentFrom_.prototype.constructor = DifferentFrom_;
 ```
 
 *That's it!* Just three methods: `constructor`, `isSatisfiedBy`, and `toString()`.
+
+## License
+
+[MIT](LICENSE) © [Thiago Delgado Pinto](https://github.com/thiagodp)
