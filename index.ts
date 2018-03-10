@@ -319,3 +319,20 @@ export class LengthBetween_< T > extends Composite_< T > {
     }
 
 }
+
+
+export class Matches_< T > extends Composite_< T > {
+
+    constructor( private _regex: RegExp ) {
+        super();
+    }
+
+    isSatisfiedBy( candidate: T ): boolean {
+        return this._regex.test( candidate.toString() );
+    }
+
+    toString(): string {
+        return 'regex ' + this._regex.source;
+    }
+
+}

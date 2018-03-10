@@ -1,4 +1,4 @@
-import { Between_, Composite_, In_, EqualTo_, GreaterThan_, LessThan_, StartsWith_, EndsWith_, Contains_, LengthBetween_ } from "../index";
+import { Between_, Composite_, In_, EqualTo_, GreaterThan_, LessThan_, StartsWith_, EndsWith_, Contains_, LengthBetween_, Matches_ } from "../index";
 
 
 describe( 'equal to', () => {
@@ -458,6 +458,25 @@ describe( 'length between', () => {
         expect(
             ( new LengthBetween_( 2, 5 ) )
             .isSatisfiedBy( 'loooooonger' )
+        ).toBeFalsy();
+    } );    
+
+} );
+
+
+describe( 'matches', () => {
+
+    it( 'right', () => {
+        expect(
+            ( new Matches_( /^foo$/ ) )
+            .isSatisfiedBy( 'foo' )
+        ).toBeTruthy();
+    } );
+
+    it( 'wrong', () => {
+        expect(
+            ( new Matches_( /^foo$/ ) )
+            .isSatisfiedBy( 'bar' )
         ).toBeFalsy();
     } );    
 
