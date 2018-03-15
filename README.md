@@ -58,7 +58,7 @@ console.log( rules.isSatisfiedBy( 51 ) ); // true
 ```js
 import { StartsWith_, Contains_ } from 'spec-pattern';
 
-let rules = new StartsWith( 'Hello' )
+let rules = new StartsWith_( 'Hello' )
     .andNot( new Contains_( 'world' ) );
 
 console.log( rules.isSatisfiedBy( 'Hello Bob' ) ); // true
@@ -68,7 +68,7 @@ console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
 import { LengthBetween_, EqualTo_ } from 'spec-pattern';
 
 let rules = new LengthBetween_( 2, 5 )
-    .andNot( new EqualTo( 'Hello' ) );
+    .andNot( new EqualTo_( 'Hello' ) );
 
 console.log( rules.isSatisfiedBy( '' ) ); // false
 console.log( rules.isSatisfiedBy( 'Hi' ) ); // true
