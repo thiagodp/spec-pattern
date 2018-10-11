@@ -1,7 +1,7 @@
 # spec-pattern
 Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Specification_pattern) for JavaScript and TypeScript.
 
-> Useful for building complex filters or rules in a easy way.
+> Build complex filters and rules easily.
 
 No external dependencies. Fully [tested](__tests__/index.spec.ts). Adopts [semantic versioning](https://semver.org). *Forks are welcome!*
 
