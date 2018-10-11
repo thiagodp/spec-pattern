@@ -5,7 +5,7 @@ Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Spec
 
 No external dependencies. Fully [tested](__tests__/index.spec.ts). Adopts [semantic versioning](https://semver.org). *Forks are welcome!*
 
-[![Build Status](https://travis-ci.org/thiagodp/spec-pattern.svg?branch=master)](https://travis-ci.org/thiagodp/spec-pattern)
+[![Build Status](https://travis-ci.org/thiagodp/spec-pattern.svg?branch=master)](https://travis-ci.org/thiagodp/spec-pattern) [![Greenkeeper badge](https://badges.greenkeeper.io/thiagodp/spec-pattern.svg)](https://greenkeeper.io/)
 
 ## Install
 
