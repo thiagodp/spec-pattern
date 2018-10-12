@@ -1,50 +1,50 @@
-export interface Spec_< T > {
+export interface Spec< T > {
 
     isSatisfiedBy( candidate: T ): boolean;
 
-    and( other: Spec_< T > ): Spec_< T >;
+    and( other: Spec< T > ): Spec< T >;
 
-    andNot( other: Spec_< T > ): Spec_< T >;
+    andNot( other: Spec< T > ): Spec< T >;
 
-    or( other: Spec_< T > ): Spec_< T >;
+    or( other: Spec< T > ): Spec< T >;
 
-    orNot( other: Spec_< T > ): Spec_< T >;
+    orNot( other: Spec< T > ): Spec< T >;
 
-    not(): Spec_< T >;
+    not(): Spec< T >;
 
 }
 
 
-export abstract class Composite_< T > implements Spec_< T > {
+export abstract class Composite< T > implements Spec< T > {
 
     abstract isSatisfiedBy( candidate: T ): boolean
 
-    and( other: Spec_< T > ): Spec_< T > {
-        return new And_< T >( this, other );
+    and( other: Spec< T > ): Spec< T > {
+        return new And< T >( this, other );
     }
 
-    andNot( other: Spec_< T > ): Spec_< T > {
-        return new AndNot_< T >( this, other );
+    andNot( other: Spec< T > ): Spec< T > {
+        return new AndNot< T >( this, other );
     }
 
-    or( other: Spec_< T > ): Spec_< T > {
-        return new Or_< T >( this, other );
+    or( other: Spec< T > ): Spec< T > {
+        return new Or< T >( this, other );
     }
 
-    orNot( other: Spec_< T > ): Spec_< T > {
-        return new OrNot_< T >( this, other );
+    orNot( other: Spec< T > ): Spec< T > {
+        return new OrNot< T >( this, other );
     }
 
-    not(): Spec_< T > {
-        return new Not_< T >( this );
+    not(): Spec< T > {
+        return new Not< T >( this );
     }
 
 }
 
 
-export class And_< T > extends Composite_< T > {
+export class And< T > extends Composite< T > {
 
-    constructor( private _left: Spec_< T >, private _right: Spec_< T > ) {
+    constructor( private _left: Spec< T >, private _right: Spec< T > ) {
         super();
     }
 
@@ -59,9 +59,9 @@ export class And_< T > extends Composite_< T > {
 }
 
 
-export class AndNot_< T > extends Composite_< T > {
+export class AndNot< T > extends Composite< T > {
 
-    constructor( private _left: Spec_< T >, private _right: Spec_< T > ) {
+    constructor( private _left: Spec< T >, private _right: Spec< T > ) {
         super();
     }
 
@@ -76,9 +76,9 @@ export class AndNot_< T > extends Composite_< T > {
 }
 
 
-export class Or_< T > extends Composite_< T > {
+export class Or< T > extends Composite< T > {
 
-    constructor( private _left: Spec_< T >, private _right: Spec_< T > ) {
+    constructor( private _left: Spec< T >, private _right: Spec< T > ) {
         super();
     }
 
@@ -93,9 +93,9 @@ export class Or_< T > extends Composite_< T > {
 }
 
 
-export class OrNot_< T > extends Composite_< T > {
+export class OrNot< T > extends Composite< T > {
 
-    constructor( private _left: Spec_< T >, private _right: Spec_< T > ) {
+    constructor( private _left: Spec< T >, private _right: Spec< T > ) {
         super();
     }
 
@@ -110,9 +110,9 @@ export class OrNot_< T > extends Composite_< T > {
 }
 
 
-export class Not_< T > extends Composite_< T > {
+export class Not< T > extends Composite< T > {
 
-    constructor( private _other: Spec_< T > ) {
+    constructor( private _other: Spec< T > ) {
         super();
     }
 
@@ -127,7 +127,7 @@ export class Not_< T > extends Composite_< T > {
 }
 
 
-export class EqualTo_< T > extends Composite_< T > {
+export class EqualTo< T > extends Composite< T > {
 
     constructor( private _value: T ) {
         super();
@@ -144,7 +144,7 @@ export class EqualTo_< T > extends Composite_< T > {
 }
 
 
-export class GreaterThan_< T > extends Composite_< T > {
+export class GreaterThan< T > extends Composite< T > {
 
     constructor( private _min: T ) {
         super();
@@ -161,7 +161,7 @@ export class GreaterThan_< T > extends Composite_< T > {
 }
 
 
-export class GreaterThanOrEqualTo_< T > extends Composite_< T > {
+export class GreaterThanOrEqualTo< T > extends Composite< T > {
 
     constructor( private _min: T ) {
         super();
@@ -178,7 +178,7 @@ export class GreaterThanOrEqualTo_< T > extends Composite_< T > {
 }
 
 
-export class LessThan_< T > extends Composite_< T > {
+export class LessThan< T > extends Composite< T > {
 
     constructor( private _max: T ) {
         super();
@@ -195,7 +195,7 @@ export class LessThan_< T > extends Composite_< T > {
 }
 
 
-export class LessThanOrEqualTo_< T > extends Composite_< T > {
+export class LessThanOrEqualTo< T > extends Composite< T > {
 
     constructor( private _max: T ) {
         super();
@@ -212,7 +212,7 @@ export class LessThanOrEqualTo_< T > extends Composite_< T > {
 }
 
 
-export class StartsWith_< T > extends Composite_< T > {
+export class StartsWith< T > extends Composite< T > {
 
     constructor( private _value: string, private _ignoreCase: boolean = false ) {
         super();
@@ -231,7 +231,7 @@ export class StartsWith_< T > extends Composite_< T > {
 }
 
 
-export class EndsWith_< T > extends Composite_< T > {
+export class EndsWith< T > extends Composite< T > {
 
     constructor( private _value: string, private _ignoreCase: boolean = false ) {
         super();
@@ -250,7 +250,7 @@ export class EndsWith_< T > extends Composite_< T > {
 }
 
 
-export class Contains_< T > extends Composite_< T > {
+export class Contains< T > extends Composite< T > {
 
     constructor( private _value: string, private _ignoreCase: boolean = false ) {
         super();
@@ -269,7 +269,7 @@ export class Contains_< T > extends Composite_< T > {
 }
 
 
-export class In_< T > extends Composite_< T > {
+export class In< T > extends Composite< T > {
 
     constructor( private _values: T[] ) {
         super();
@@ -286,7 +286,7 @@ export class In_< T > extends Composite_< T > {
 }
 
 
-export class Between_< T > extends Composite_< T > {
+export class Between< T > extends Composite< T > {
 
     constructor( private _min: T, private _max: T ) {
         super();
@@ -303,7 +303,7 @@ export class Between_< T > extends Composite_< T > {
 }
 
 
-export class LengthBetween_< T > extends Composite_< T > {
+export class LengthBetween< T > extends Composite< T > {
 
     constructor( private _min: number, private _max: number ) {
         super();
@@ -321,7 +321,7 @@ export class LengthBetween_< T > extends Composite_< T > {
 }
 
 
-export class Matches_< T > extends Composite_< T > {
+export class Matches< T > extends Composite< T > {
 
     constructor( private _regex: RegExp ) {
         super();

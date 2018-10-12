@@ -1,13 +1,14 @@
 # spec-pattern
-Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Specification_pattern) for JavaScript and TypeScript.
+
+Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Specificationpattern) for JavaScript and TypeScript.
+
+[![Build Status](https://travis-ci.org/thiagodp/spec-pattern.svg?branch=master)](https://travis-ci.org/thiagodp/spec-pattern) [![Greenkeeper badge](https://badges.greenkeeper.io/thiagodp/spec-pattern.svg)](https://greenkeeper.io/)
 
 > Build complex filters and rules easily.
 
 - No external dependencies.
-- Fully [tested](__tests__/index.spec.ts).
+- Fully [tested](tests/index.spec.ts).
 - Uses [semantic versioning](https://semver.org). *Forks are welcome!*
-
-[![Build Status](https://travis-ci.org/thiagodp/spec-pattern.svg?branch=master)](https://travis-ci.org/thiagodp/spec-pattern) [![Greenkeeper badge](https://badges.greenkeeper.io/thiagodp/spec-pattern.svg)](https://greenkeeper.io/)
 
 ## Install
 
@@ -19,9 +20,9 @@ $ npm install spec-pattern --save
 
 #### A simple Between rule
  ```js
-import { Between_ } from 'spec-pattern';
+import { Between } from 'spec-pattern';
 
-let rules = new Between_( 1, 3 );
+let rules = new Between( 1, 3 );
 
 console.log( rules.isSatisfiedBy( 2 ) ); // true
 ```
@@ -29,10 +30,10 @@ console.log( rules.isSatisfiedBy( 2 ) ); // true
 
 #### A little more complex Between rule
  ```js
-import { Between_ } from 'spec-pattern';
+import { Between } from 'spec-pattern';
 
-let rules = new Between_( 1, 3 )
-    .or( new Between_( 6, 9 ) );
+let rules = new Between( 1, 3 )
+    .or( new Between( 6, 9 ) );
 
 console.log( rules.isSatisfiedBy( 2 ) ); // true
 console.log( rules.isSatisfiedBy( 7 ) ); // true
@@ -41,12 +42,12 @@ console.log( rules.isSatisfiedBy( 5 ) ); // false
 
 #### Composing rules
  ```js
-import { Between_, In_, GreaterThan_ } from 'spec-pattern';
+import { Between, In, GreaterThan } from 'spec-pattern';
 
-let rules = new Between_( 1, 3 )
-    .or( new Between_( 6, 9 ) )
-    .or( new In_( [ 11, 25, 31 ] )
-    .or( new GreaterThan_( 50 ) );
+let rules = new Between( 1, 3 )
+    .or( new Between( 6, 9 ) )
+    .or( new In( [ 11, 25, 31 ] )
+    .or( new GreaterThan( 50 ) );
 
 console.log( rules.isSatisfiedBy( 2 ) ); // true
 console.log( rules.isSatisfiedBy( 7 ) ); // true
@@ -58,19 +59,19 @@ console.log( rules.isSatisfiedBy( 51 ) ); // true
 
 #### Not only numbers
 ```js
-import { StartsWith_, Contains_ } from 'spec-pattern';
+import { StartsWith, Contains } from 'spec-pattern';
 
-let rules = new StartsWith_( 'Hello' )
-    .andNot( new Contains_( 'world' ) );
+let rules = new StartsWith( 'Hello' )
+    .andNot( new Contains( 'world' ) );
 
 console.log( rules.isSatisfiedBy( 'Hello Bob' ) ); // true
 console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
 ```
 ```js
-import { LengthBetween_, EqualTo_ } from 'spec-pattern';
+import { LengthBetween, EqualTo } from 'spec-pattern';
 
-let rules = new LengthBetween_( 2, 5 )
-    .andNot( new EqualTo_( 'Hello' ) );
+let rules = new LengthBetween( 2, 5 )
+    .andNot( new EqualTo( 'Hello' ) );
 
 console.log( rules.isSatisfiedBy( '' ) ); // false
 console.log( rules.isSatisfiedBy( 'Hi' ) ); // true
@@ -81,80 +82,80 @@ console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
 
 ## Available classes
 
-- `EqualTo_( value: any )`
-- `GreaterThan_( value: any )`
-- `GreaterThanOrEqualTo_( value: any )`
-- `LessThan_( value: any )`
-- `LessThanOrEqualTo_( value: any )`
-- `Between_( min: any, max: any )`
-- `In_( values: array )`
-- `StartsWith_( value: string, ignoreCase: boolean = false )`
-- `EndsWith_( value: string, ignoreCase: boolean = false )`
-- `Contains_( value: string, ignoreCase: boolean = false )`
-- `LengthBetween_( min: any, max: any )`
-- `Matches_( regex: RegExp )`
+- `EqualTo( value: any )`
+- `GreaterThan( value: any )`
+- `GreaterThanOrEqualTo( value: any )`
+- `LessThan( value: any )`
+- `LessThanOrEqualTo( value: any )`
+- `Between( min: any, max: any )`
+- `In( values: array )`
+- `StartsWith( value: string, ignoreCase: boolean = false )`
+- `EndsWith( value: string, ignoreCase: boolean = false )`
+- `Contains( value: string, ignoreCase: boolean = false )`
+- `LengthBetween( min: any, max: any )`
+- `Matches( regex: RegExp )`
 
-All these classes extend the abstract class `Composite_`, which in turn implements the interface `Spec_`:
+All these classes extend the abstract class `Composite`, which in turn implements the interface `Spec`:
 
 ```typescript
-interface Spec_< T > {
+interface Spec< T > {
 
     isSatisfiedBy( candidate: T ): boolean;
 
-    and( other: Spec_< T > ): Spec_< T >;
+    and( other: Spec< T > ): Spec< T >;
 
-    andNot( other: Spec_< T > ): Spec_< T >;
+    andNot( other: Spec< T > ): Spec< T >;
 
-    or( other: Spec_< T > ): Spec_< T >;
+    or( other: Spec< T > ): Spec< T >;
 
-    orNot( other: Spec_< T > ): Spec_< T >;
+    orNot( other: Spec< T > ): Spec< T >;
 
-    not(): Spec_< T >;
+    not(): Spec< T >;
 }
 ```
 
 ## Creating your own class
 
-Creating your own class is **very easy**. Just extends *abstract* class `Composite_`, like in the following example. Of course, you can also extend one of the aforementioned classes or implement the interface `Spec_` *(but why reinventing the wheel, right?)*.
+Creating your own class is **very easy**. Just extends *abstract* class `Composite`, like in the following example. Of course, you can also extend one of the aforementioned classes or implement the interface `Spec` *(but why reinventing the wheel, right?)*.
 
-Let's create a class `DifferentFrom_` ...
+Let's create a class `DifferentFrom` ...
 
 *...in TypeScript:*
 ```typescript
-import { Composite_ } from 'spec-pattern';
+import { Composite } from 'spec-pattern';
 
-export class DifferentFrom_< T > extends Composite_< T > {
+export class DifferentFrom< T > extends Composite< T > {
 
-    constructor( private _value: T ) {
+    constructor( private value: T ) {
         super();
     }
 
     isSatisfiedBy( candidate: T ): boolean {
-        return this._value != candidate;
+        return this.value != candidate;
     }
 
     toString(): string {
-        return 'different from ' + this._value;
+        return 'different from ' + this.value;
     }
 }
 ```
 
 *...or in JavaScript 6+:*
 ```js
-import { Composite_ } from 'spec-pattern';
+import { Composite } from 'spec-pattern';
 
-class DifferentFrom_ extends Composite_ {
+class DifferentFrom extends Composite {
 
     constructor( value ) {
-        this._value = value;
+        this.value = value;
     }
 
     isSatisfiedBy( candidate ) {
-        return this._value != candidate;
+        return this.value != candidate;
     }
 
     toString() {
-        return 'different from ' + this._value;
+        return 'different from ' + this.value;
     }
 }
 ```
@@ -162,25 +163,25 @@ class DifferentFrom_ extends Composite_ {
 
 *...or in JavaScript 5+:*
 ```js
-var Composite_  = require( 'spec-pattern' ).Composite_;
+var Composite  = require( 'spec-pattern' ).Composite;
 
-function DifferentFrom_( value ) {
+function DifferentFrom( value ) {
 
-    Composite_.call( this ); // super()
+    Composite.call( this ); // super()
 
-    this._value = value;
+    this.value = value;
 
     this.isSatisfiedBy = function ( candidate ) {
-        return this._value != candidate;
+        return this.value != candidate;
     };
 
     this.toString = function() {
-        return 'different from ' + this._value;
+        return 'different from ' + this.value;
     };
 }
 
-DifferentFrom_.prototype = Object.create( Composite_.prototype );
-DifferentFrom_.prototype.constructor = DifferentFrom_;
+DifferentFrom.prototype = Object.create( Composite.prototype );
+DifferentFrom.prototype.constructor = DifferentFrom;
 ```
 
 *That's it!* Just three methods: `constructor`, `isSatisfiedBy`, and `toString()`.
