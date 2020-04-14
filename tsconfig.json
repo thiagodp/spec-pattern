@@ -2,18 +2,19 @@
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
-        "outDir": "dist",    
+        "outDir": "dist",
         "declaration": true,
-        "sourceMap": true,
+        "sourceMap": false,
         "allowJs": false,
         "noImplicitAny": false,
         "typeRoots": [
             "./node_modules/@types"
-        ]        
+        ],
+        "lib": [ "ES2015" ]
     },
     "exclude": [
+        "__tests__",
         "node_modules",
-        "typings/globals",
         "dist"
     ]
 }

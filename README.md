@@ -7,13 +7,13 @@ Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Spec
 > Build complex filters and rules easily.
 
 - No external dependencies.
-- Fully [tested](tests/index.spec.ts).
+- Fully [tested](https://github.com/thiagodp/spec-pattern/blob/master/__tests__/index.spec.ts).
 - Uses [semantic versioning](https://semver.org). *Forks are welcome!*
 
 ## Install
 
-```console
-$ npm install spec-pattern --save
+```bash
+$ npm install spec-pattern
 ```
 
 ## Examples
@@ -67,6 +67,7 @@ let rules = new StartsWith( 'Hello' )
 console.log( rules.isSatisfiedBy( 'Hello Bob' ) ); // true
 console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
 ```
+
 ```js
 import { LengthBetween, EqualTo } from 'spec-pattern';
 
