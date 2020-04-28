@@ -1,54 +1,54 @@
-export interface Spec< T > {
+export interface Spec< C, T extends C | unknown > {
 
-    isSatisfiedBy( candidate: T ): boolean;
+    isSatisfiedBy( candidate: C | T ): boolean;
 
-    and( other: Spec< T > ): Spec< T >;
+    and( other: Spec< C, T > ): Spec< C, T >;
 
-    andNot( other: Spec< T > ): Spec< T >;
+    andNot( other: Spec< C, T > ): Spec< C, T >;
 
-    or( other: Spec< T > ): Spec< T >;
+    or( other: Spec< C, T > ): Spec< C, T >;
 
-    orNot( other: Spec< T > ): Spec< T >;
+    orNot( other: Spec< C, T > ): Spec< C, T >;
 
-    not(): Spec< T >;
-
-}
-
-
-export abstract class Composite< T > implements Spec< T > {
-
-    abstract isSatisfiedBy( candidate: T ): boolean
-
-    and( other: Spec< T > ): Spec< T > {
-        return new And< T >( this, other );
-    }
-
-    andNot( other: Spec< T > ): Spec< T > {
-        return new AndNot< T >( this, other );
-    }
-
-    or( other: Spec< T > ): Spec< T > {
-        return new Or< T >( this, other );
-    }
-
-    orNot( other: Spec< T > ): Spec< T > {
-        return new OrNot< T >( this, other );
-    }
-
-    not(): Spec< T > {
-        return new Not< T >( this );
-    }
+    not(): Spec< C, T >;
 
 }
 
 
-export class And< T > extends Composite< T > {
+export abstract class Composite< C, T > implements Spec< C, T > {
 
-    constructor( private _left: Spec< T >, private _right: Spec< T > ) {
+    abstract isSatisfiedBy( candidate: C | T ): boolean;
+
+    and( other: Spec< C, T > ): Spec< C, T > {
+        return new And< C, T >( this, other );
+    }
+
+    andNot( other: Spec< C, T > ): Spec< C, T > {
+        return new AndNot< C, T >( this, other );
+    }
+
+    or( other: Spec< C, T > ): Spec< C, T > {
+        return new Or< C, T >( this, other );
+    }
+
+    orNot( other: Spec< C, T > ): Spec< C, T > {
+        return new OrNot< C, T >( this, other );
+    }
+
+    not(): Spec< C, T > {
+        return new Not< C, T >( this );
+    }
+
+}
+
+
+export class And< C, T extends C | unknown > extends Composite< C, T > {
+
+    constructor( private _left: Spec< C, T >, private _right: Spec< C, T > ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         return this._left.isSatisfiedBy( candidate ) && this._right.isSatisfiedBy( candidate );
     }
 
@@ -59,13 +59,13 @@ export class And< T > extends Composite< T > {
 }
 
 
-export class AndNot< T > extends Composite< T > {
+export class AndNot< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _left: Spec< T >, private _right: Spec< T > ) {
+    constructor( private _left: Spec< C, T >, private _right: Spec< C, T > ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         return this._left.isSatisfiedBy( candidate ) && ! this._right.isSatisfiedBy( candidate );
     }
 
@@ -76,13 +76,13 @@ export class AndNot< T > extends Composite< T > {
 }
 
 
-export class Or< T > extends Composite< T > {
+export class Or< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _left: Spec< T >, private _right: Spec< T > ) {
+    constructor( private _left: Spec< C, T >, private _right: Spec< C, T > ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         return this._left.isSatisfiedBy( candidate ) || this._right.isSatisfiedBy( candidate );
     }
 
@@ -93,13 +93,13 @@ export class Or< T > extends Composite< T > {
 }
 
 
-export class OrNot< T > extends Composite< T > {
+export class OrNot< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _left: Spec< T >, private _right: Spec< T > ) {
+    constructor( private _left: Spec< C, T >, private _right: Spec< C, T > ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         return this._left.isSatisfiedBy( candidate ) || ! this._right.isSatisfiedBy( candidate );
     }
 
@@ -110,13 +110,13 @@ export class OrNot< T > extends Composite< T > {
 }
 
 
-export class Not< T > extends Composite< T > {
+export class Not< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _other: Spec< T > ) {
+    constructor( private _other: Spec< C, T > ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         return ! this._other.isSatisfiedBy( candidate );
     }
 
@@ -127,13 +127,13 @@ export class Not< T > extends Composite< T > {
 }
 
 
-export class EqualTo< T > extends Composite< T > {
+export class EqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _value: T ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         return this._value == candidate;
     }
 
@@ -143,14 +143,78 @@ export class EqualTo< T > extends Composite< T > {
 
 }
 
+export class StrictEqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
-export class GreaterThan< T > extends Composite< T > {
+    constructor( private _value: T ) {
+        super();
+    }
+
+    isSatisfiedBy( candidate: C | T ): boolean {
+        return this._value === candidate;
+    }
+
+    toString(): string {
+        return 'strict equal to ' + this._value;
+    }
+
+}
+
+export class SameValueAs< C, T extends C | unknown > extends Composite< C, T > {
+
+    constructor( private _value: T ) {
+        super();
+    }
+
+    isSatisfiedBy( candidate: C | T ): boolean {
+
+        const hasSimpleType = ( x: unknown ): boolean =>
+            [ 'string', 'number', 'bigint', 'boolean', 'undefined' ].indexOf( typeof x ) >= 0;
+
+        if ( hasSimpleType( candidate ) && hasSimpleType( this._value ) ) {
+            return candidate == this._value;
+        }
+
+        return JSON.stringify( candidate ) == JSON.stringify( this._value );
+    }
+
+    toString(): string {
+        return 'has same value as ' + this._value;
+    }
+
+}
+
+
+export class SameTypeAs< C, T extends C | unknown > extends Composite< C, T > {
+
+    constructor( private _value: T ) {
+        super();
+    }
+
+    isSatisfiedBy( candidate: C | T ): boolean {
+
+        const notAnObject = ( x: unknown ): boolean => typeof x != 'object';
+
+        if ( notAnObject( candidate ) && notAnObject( this._value ) ) {
+            return typeof candidate == typeof this._value;
+        }
+
+        return candidate.constructor.name == this._value.constructor.name;
+    }
+
+    toString(): string {
+        return 'has same type as ' + this._value;
+    }
+
+}
+
+
+export class GreaterThan< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _min: T ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         return candidate > this._min;
     }
 
@@ -161,13 +225,13 @@ export class GreaterThan< T > extends Composite< T > {
 }
 
 
-export class GreaterThanOrEqualTo< T > extends Composite< T > {
+export class GreaterThanOrEqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _min: T ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         return candidate >= this._min;
     }
 
@@ -178,13 +242,13 @@ export class GreaterThanOrEqualTo< T > extends Composite< T > {
 }
 
 
-export class LessThan< T > extends Composite< T > {
+export class LessThan< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _max: T ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         return candidate < this._max;
     }
 
@@ -195,13 +259,13 @@ export class LessThan< T > extends Composite< T > {
 }
 
 
-export class LessThanOrEqualTo< T > extends Composite< T > {
+export class LessThanOrEqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _max: T ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         return candidate <= this._max;
     }
 
@@ -212,13 +276,13 @@ export class LessThanOrEqualTo< T > extends Composite< T > {
 }
 
 
-export class StartsWith< T > extends Composite< T > {
+export class StartsWith< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _value: string, private _ignoreCase: boolean = false ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         const c = this._ignoreCase ? candidate.toString().toLowerCase() : candidate.toString();
         const v = this._ignoreCase ? this._value.toString().toLowerCase() : this._value.toString();
         return 0 === c.indexOf( v );
@@ -231,13 +295,13 @@ export class StartsWith< T > extends Composite< T > {
 }
 
 
-export class EndsWith< T > extends Composite< T > {
+export class EndsWith< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _value: string, private _ignoreCase: boolean = false ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         const c = this._ignoreCase ? candidate.toString().toLowerCase() : candidate.toString();
         const v = this._ignoreCase ? this._value.toString().toLowerCase() : this._value.toString();
         return c.substr( c.length - v.length, v.length ) === v;
@@ -250,13 +314,13 @@ export class EndsWith< T > extends Composite< T > {
 }
 
 
-export class Contains< T > extends Composite< T > {
+export class Contains< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _value: string, private _ignoreCase: boolean = false ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         const c = this._ignoreCase ? candidate.toString().toLowerCase() : candidate.toString();
         const v = this._ignoreCase ? this._value.toString().toLowerCase() : this._value.toString();
         return c.indexOf( v ) !== -1;
@@ -269,14 +333,14 @@ export class Contains< T > extends Composite< T > {
 }
 
 
-export class In< T > extends Composite< T > {
+export class In< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _values: T[] ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
-        return this._values.indexOf( candidate ) >= 0;
+    isSatisfiedBy( candidate: C | T ): boolean {
+        return this._values.indexOf( candidate as T ) >= 0;
     }
 
     toString(): string {
@@ -286,13 +350,13 @@ export class In< T > extends Composite< T > {
 }
 
 
-export class Between< T > extends Composite< T > {
+export class Between< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _min: T, private _max: T ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         return candidate >= this._min && candidate <= this._max;
     }
 
@@ -303,13 +367,13 @@ export class Between< T > extends Composite< T > {
 }
 
 
-export class LengthBetween< T > extends Composite< T > {
+export class LengthBetween< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _min: number, private _max: number ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         const len = candidate.toString().length;
         return len >= this._min && len <= this._max;
     }
@@ -321,13 +385,13 @@ export class LengthBetween< T > extends Composite< T > {
 }
 
 
-export class Matches< T > extends Composite< T > {
+export class Matches< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _regex: RegExp ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
+    isSatisfiedBy( candidate: C | T ): boolean {
         return this._regex.test( candidate.toString() );
     }
 

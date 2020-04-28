@@ -1,6 +1,6 @@
 {
   "name": "spec-pattern",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Specification Pattern in TypeScript",
   "license": "MIT",
   "author": "Thiago Delgado Pinto",
@@ -29,6 +29,7 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "test": "jest --all",
+    "all": "npm run build && npm run test",
     "preversion": "npm run build && npm run test",
     "postversion": "git push && git push --tags"
   },

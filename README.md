@@ -88,18 +88,22 @@ console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
 
 ## Available classes
 
-- `EqualTo( value: any )`
+- `SameValueAs( value: any )`: equality of values, not of types, not of instances
+- `StrictSameValueAs( value: any )`: equality of values and types, not of instances
+- `EqualTo( value: any )`: equality of values or instances, with `==`
+- `StrictEqualTo( value: any )`: equality of values and types or of instances, with `===`
+- `SameTypeAs( value: any )`: equality of types
 - `GreaterThan( value: any )`
 - `GreaterThanOrEqualTo( value: any )`
 - `LessThan( value: any )`
 - `LessThanOrEqualTo( value: any )`
 - `Between( min: any, max: any )`
-- `In( values: array )`
-- `StartsWith( value: string, ignoreCase: boolean = false )`
-- `EndsWith( value: string, ignoreCase: boolean = false )`
-- `Contains( value: string, ignoreCase: boolean = false )`
-- `LengthBetween( min: any, max: any )`
-- `Matches( regex: RegExp )`
+- `In( values: array )`: inside an array
+- `StartsWith( value: string, ignoreCase: boolean = false )`: string starts with
+- `EndsWith( value: string, ignoreCase: boolean = false )`: string ends with
+- `Contains( value: string, ignoreCase: boolean = false )`: string contains
+- `LengthBetween( min: any, max: any )`: string length between two values
+- `Matches( regex: RegExp )`: matches a regular expression
 
 All these classes extend the abstract class `Composite`, which in turn implements the interface `Spec`:
 
@@ -122,7 +126,7 @@ interface Spec< T > {
 
 ## Creating your own class
 
-Creating your own class is **very easy**. Just extends *abstract* class `Composite`, like in the following example. Of course, you can also extend one of the aforementioned classes or implement the interface `Spec` *(but why reinventing the wheel, right?)*.
+Create your own class by extending the *abstract* class `Composite`, like in the following example. Of course, you can also extend one of the aforementioned classes or implement the interface `Spec` *(but why reinventing the wheel, right?)*.
 
 Let's create a class `DifferentFrom` ...
 
@@ -130,19 +134,20 @@ Let's create a class `DifferentFrom` ...
 ```typescript
 import { Composite } from 'spec-pattern';
 
-export class DifferentFrom< T > extends Composite< T > {
+export class DifferentFrom< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private value: T ) {
+    constructor( private _value: T ) {
         super();
     }
 
-    isSatisfiedBy( candidate: T ): boolean {
-        return this.value != candidate;
+    isSatisfiedBy( candidate: C | T ): boolean {
+        return this._value != candidate;
     }
 
     toString(): string {
-        return 'different from ' + this.value;
+        return 'different from ' + this._value;
     }
+
 }
 ```
 

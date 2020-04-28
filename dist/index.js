@@ -134,6 +134,64 @@ var EqualTo = /** @class */ (function (_super) {
     return EqualTo;
 }(Composite));
 exports.EqualTo = EqualTo;
+var StrictEqualTo = /** @class */ (function (_super) {
+    __extends(StrictEqualTo, _super);
+    function StrictEqualTo(_value) {
+        var _this = _super.call(this) || this;
+        _this._value = _value;
+        return _this;
+    }
+    StrictEqualTo.prototype.isSatisfiedBy = function (candidate) {
+        return this._value === candidate;
+    };
+    StrictEqualTo.prototype.toString = function () {
+        return 'strict equal to ' + this._value;
+    };
+    return StrictEqualTo;
+}(Composite));
+exports.StrictEqualTo = StrictEqualTo;
+var SameValueAs = /** @class */ (function (_super) {
+    __extends(SameValueAs, _super);
+    function SameValueAs(_value) {
+        var _this = _super.call(this) || this;
+        _this._value = _value;
+        return _this;
+    }
+    SameValueAs.prototype.isSatisfiedBy = function (candidate) {
+        var hasSimpleType = function (x) {
+            return ['string', 'number', 'bigint', 'boolean', 'undefined'].indexOf(typeof x) >= 0;
+        };
+        if (hasSimpleType(candidate) && hasSimpleType(this._value)) {
+            return candidate == this._value;
+        }
+        return JSON.stringify(candidate) == JSON.stringify(this._value);
+    };
+    SameValueAs.prototype.toString = function () {
+        return 'has same value as ' + this._value;
+    };
+    return SameValueAs;
+}(Composite));
+exports.SameValueAs = SameValueAs;
+var SameTypeAs = /** @class */ (function (_super) {
+    __extends(SameTypeAs, _super);
+    function SameTypeAs(_value) {
+        var _this = _super.call(this) || this;
+        _this._value = _value;
+        return _this;
+    }
+    SameTypeAs.prototype.isSatisfiedBy = function (candidate) {
+        var notAnObject = function (x) { return typeof x != 'object'; };
+        if (notAnObject(candidate) && notAnObject(this._value)) {
+            return typeof candidate == typeof this._value;
+        }
+        return candidate.constructor.name == this._value.constructor.name;
+    };
+    SameTypeAs.prototype.toString = function () {
+        return 'has same type as ' + this._value;
+    };
+    return SameTypeAs;
+}(Composite));
+exports.SameTypeAs = SameTypeAs;
 var GreaterThan = /** @class */ (function (_super) {
     __extends(GreaterThan, _super);
     function GreaterThan(_min) {
