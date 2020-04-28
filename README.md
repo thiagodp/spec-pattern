@@ -108,19 +108,20 @@ console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
 All these classes extend the abstract class `Composite`, which in turn implements the interface `Spec`:
 
 ```typescript
-interface Spec< T > {
+export interface Spec< C, T extends C | unknown > {
 
-    isSatisfiedBy( candidate: T ): boolean;
+    isSatisfiedBy( candidate: C | T ): boolean;
 
-    and( other: Spec< T > ): Spec< T >;
+    and( other: Spec< C, T > ): Spec< C, T >;
 
-    andNot( other: Spec< T > ): Spec< T >;
+    andNot( other: Spec< C, T > ): Spec< C, T >;
 
-    or( other: Spec< T > ): Spec< T >;
+    or( other: Spec< C, T > ): Spec< C, T >;
 
-    orNot( other: Spec< T > ): Spec< T >;
+    orNot( other: Spec< C, T > ): Spec< C, T >;
 
-    not(): Spec< T >;
+    not(): Spec< C, T >;
+
 }
 ```
 
