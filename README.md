@@ -104,6 +104,8 @@ console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
 - `Contains( value: string, ignoreCase: boolean = false )`: string contains
 - `LengthBetween( min: any, max: any )`: string length between two values
 - `Matches( regex: RegExp )`: matches a regular expression
+- `Any( ...specs: Spec )`: composite that takes in multiple `Spec`s and performs an or
+- `All( ...specs: Spec )`: composite that takes in multiple `Spec`s and performs an and
 
 All these classes extend the abstract class `Composite`, which in turn implements the interface `Spec`:
 
