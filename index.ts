@@ -414,7 +414,7 @@ export class Any< C, T extends C | unknown > extends Composite< C, T > {
 		for (const currentSpec of this.specs) {
 			if (currentSpec.isSatisfiedBy(candidate)) return true;
 		}
-		return false;
+		return this.specs.length == 0;
 	}
 
 	toString(): string {
