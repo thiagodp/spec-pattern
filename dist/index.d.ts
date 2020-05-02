@@ -137,6 +137,11 @@ export declare class LengthBetween<C, T extends C | unknown> extends Composite<C
     isSatisfiedBy(candidate: C | T): boolean;
     toString(): string;
 }
+export declare class Empty<C, T extends C | unknown> extends Composite<C, T> {
+    constructor();
+    isSatisfiedBy(candidate: C | T): boolean;
+    toString(): string;
+}
 export declare class Matches<C, T extends C | unknown> extends Composite<C, T> {
     private _regex;
     constructor(_regex: RegExp);

@@ -367,6 +367,22 @@ var LengthBetween = /** @class */ (function (_super) {
     return LengthBetween;
 }(Composite));
 exports.LengthBetween = LengthBetween;
+var Empty = /** @class */ (function (_super) {
+    __extends(Empty, _super);
+    function Empty() {
+        return _super.call(this) || this;
+    }
+    Empty.prototype.isSatisfiedBy = function (candidate) {
+        return Array.isArray(candidate)
+            ? 0 === candidate.length
+            : '' === candidate;
+    };
+    Empty.prototype.toString = function () {
+        return 'is empty';
+    };
+    return Empty;
+}(Composite));
+exports.Empty = Empty;
 var Matches = /** @class */ (function (_super) {
     __extends(Matches, _super);
     function Matches(_regex) {

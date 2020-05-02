@@ -34,11 +34,7 @@
     "postversion": "git push && git push --tags"
   },
   "jest": {
-    "preset": "ts-jest",
-    "testPathIgnorePatterns": [
-      "./node_modules/",
-      "./dist/"
-    ]
+    "preset": "ts-jest"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",

@@ -104,6 +104,7 @@ console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
 - `EndsWith( value: string, ignoreCase: boolean = false )`: string ends with
 - `Contains( value: string, ignoreCase: boolean = false )`: string contains
 - `LengthBetween( min: any, max: any )`: string length between two values
+- `Empty()`: string is empty or array is empty
 - `Matches( regex: RegExp )`: matches a regular expression
 - `Any( ...specs: Spec )`: composite that takes in multiple `Spec`s and performs an or
 - `All( ...specs: Spec )`: composite that takes in multiple `Spec`s and performs an and

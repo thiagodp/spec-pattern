@@ -386,6 +386,25 @@ export class LengthBetween< C, T extends C | unknown > extends Composite< C, T >
 }
 
 
+export class Empty< C, T extends C | unknown > extends Composite< C, T > {
+
+    constructor() {
+        super();
+    }
+
+    isSatisfiedBy( candidate: C | T ): boolean {
+        return Array.isArray( candidate )
+            ? 0 === candidate.length
+            : '' === candidate;
+    }
+
+    toString(): string {
+        return 'is empty';
+    }
+
+}
+
+
 export class Matches< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _regex: RegExp ) {
