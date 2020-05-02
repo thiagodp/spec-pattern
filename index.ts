@@ -400,3 +400,45 @@ export class Matches< C, T extends C | unknown > extends Composite< C, T > {
     }
 
 }
+
+export class Any< C, T extends C | unknown > extends Composite< C, T > {
+
+	private readonly specs: Spec< C, T >[];
+
+	constructor( ...specs: Spec< C, T >[]) {
+		super();
+		this.specs = specs;
+	}
+
+	isSatisfiedBy( candidate: C | T ): boolean {
+		for (const currentSpec of this.specs) {
+			if (currentSpec.isSatisfiedBy(candidate)) return true;
+		}
+		return this.specs.length == 0;
+	}
+
+	toString(): string {
+		return '(' + this.specs.join(' or ') + ')';
+	}
+}
+
+export class All< C, T extends C | unknown > extends Composite< C, T > {
+
+	private readonly specs: Spec< C, T >[];
+
+	constructor( ...specs: Spec< C, T >[]) {
+		super();
+		this.specs = specs;
+	}
+
+	isSatisfiedBy( candidate: C | T ): boolean {
+		for (const currentSpec of this.specs) {
+			if (!currentSpec.isSatisfiedBy(candidate)) return false;
+		}
+		return true;
+	}
+
+	toString(): string {
+		return '(' + this.specs.join(' and ') + ')';
+	}
+}
