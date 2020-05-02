@@ -143,3 +143,15 @@ export declare class Matches<C, T extends C | unknown> extends Composite<C, T> {
     isSatisfiedBy(candidate: C | T): boolean;
     toString(): string;
 }
+export declare class Any<C, T extends C | unknown> extends Composite<C, T> {
+    private readonly specs;
+    constructor(...specs: Spec<C, T>[]);
+    isSatisfiedBy(candidate: C | T): boolean;
+    toString(): string;
+}
+export declare class All<C, T extends C | unknown> extends Composite<C, T> {
+    private readonly specs;
+    constructor(...specs: Spec<C, T>[]);
+    isSatisfiedBy(candidate: C | T): boolean;
+    toString(): string;
+}

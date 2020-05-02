@@ -383,3 +383,53 @@ var Matches = /** @class */ (function (_super) {
     return Matches;
 }(Composite));
 exports.Matches = Matches;
+var Any = /** @class */ (function (_super) {
+    __extends(Any, _super);
+    function Any() {
+        var specs = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            specs[_i] = arguments[_i];
+        }
+        var _this = _super.call(this) || this;
+        _this.specs = specs;
+        return _this;
+    }
+    Any.prototype.isSatisfiedBy = function (candidate) {
+        for (var _i = 0, _a = this.specs; _i < _a.length; _i++) {
+            var currentSpec = _a[_i];
+            if (currentSpec.isSatisfiedBy(candidate))
+                return true;
+        }
+        return this.specs.length == 0;
+    };
+    Any.prototype.toString = function () {
+        return '(' + this.specs.join(' or ') + ')';
+    };
+    return Any;
+}(Composite));
+exports.Any = Any;
+var All = /** @class */ (function (_super) {
+    __extends(All, _super);
+    function All() {
+        var specs = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            specs[_i] = arguments[_i];
+        }
+        var _this = _super.call(this) || this;
+        _this.specs = specs;
+        return _this;
+    }
+    All.prototype.isSatisfiedBy = function (candidate) {
+        for (var _i = 0, _a = this.specs; _i < _a.length; _i++) {
+            var currentSpec = _a[_i];
+            if (!currentSpec.isSatisfiedBy(candidate))
+                return false;
+        }
+        return true;
+    };
+    All.prototype.toString = function () {
+        return '(' + this.specs.join(' and ') + ')';
+    };
+    return All;
+}(Composite));
+exports.All = All;
