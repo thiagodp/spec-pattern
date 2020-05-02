@@ -1,13 +1,18 @@
-import {All, Spec} from "..";
+import { All, Spec } from "..";
 
 describe( 'All', () => {
-	const createFakeUnsatisfiedSpec: () => Spec<any, any> = () => ({
-		isSatisfiedBy(candidate: any): boolean {return false; }
-	} as Spec<any, any>);
 
-	const createFakeSatisfiedSpec: () => Spec<any, any> = () => ({
-		isSatisfiedBy(candidate: any): boolean { return true; }
-	} as Spec<any, any>);
+	const createFakeUnsatisfiedSpec: () => Spec< any, any > = () => (
+		{
+			isSatisfiedBy( candidate: any ): boolean { return false; }
+		} as Spec< any, any >
+	);
+
+	const createFakeSatisfiedSpec: () => Spec< any, any > = () => (
+		{
+			isSatisfiedBy( candidate: any ): boolean { return true; }
+		} as Spec< any, any >
+	);
 
 	describe( 'satisfied by', () => {
 
@@ -18,10 +23,13 @@ describe( 'All', () => {
 		} );
 
 		it( 'only passing Specs', () => {
-			const any = new All(createFakeSatisfiedSpec(),
-								createFakeSatisfiedSpec());
 
-			expect(any.isSatisfiedBy( {} )).toBeTruthy();
+			const all = new All(
+				createFakeSatisfiedSpec(),
+				createFakeSatisfiedSpec()
+				);
+
+			expect( all.isSatisfiedBy( {} ) ).toBeTruthy();
 		} );
 
 	} );
@@ -29,9 +37,11 @@ describe( 'All', () => {
 	describe( 'not satisfied by', () => {
 
 		it( 'at least one failing Spec', () => {
-			expect(
-				( new All( createFakeSatisfiedSpec(), createFakeUnsatisfiedSpec() ) ).isSatisfiedBy( 0 )
-			).toBeFalsy();
+			const all = new All(
+				createFakeSatisfiedSpec(),
+				createFakeUnsatisfiedSpec()
+			);
+			expect( all.isSatisfiedBy( 0 ) ).toBeFalsy();
 		} );
 
 	} );

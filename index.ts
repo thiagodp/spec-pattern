@@ -1,3 +1,4 @@
+
 export interface Spec< C, T extends C | unknown > {
 
     isSatisfiedBy( candidate: C | T ): boolean;
@@ -411,14 +412,16 @@ export class Any< C, T extends C | unknown > extends Composite< C, T > {
 	}
 
 	isSatisfiedBy( candidate: C | T ): boolean {
-		for (const currentSpec of this.specs) {
-			if (currentSpec.isSatisfiedBy(candidate)) return true;
+		for ( const currentSpec of this.specs ) {
+			if ( currentSpec.isSatisfiedBy( candidate ) ) {
+                return true;
+            }
 		}
-		return this.specs.length == 0;
+		return 0 == this.specs.length;
 	}
 
 	toString(): string {
-		return '(' + this.specs.join(' or ') + ')';
+		return '(' + this.specs.join( ' or ' ) + ')';
 	}
 }
 
@@ -432,13 +435,15 @@ export class All< C, T extends C | unknown > extends Composite< C, T > {
 	}
 
 	isSatisfiedBy( candidate: C | T ): boolean {
-		for (const currentSpec of this.specs) {
-			if (!currentSpec.isSatisfiedBy(candidate)) return false;
+		for ( const currentSpec of this.specs ) {
+			if ( ! currentSpec.isSatisfiedBy( candidate ) ) {
+                return false;
+            }
 		}
 		return true;
 	}
 
 	toString(): string {
-		return '(' + this.specs.join(' and ') + ')';
+		return '(' + this.specs.join( ', ' ) + ')';
 	}
 }

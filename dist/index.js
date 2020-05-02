@@ -397,10 +397,11 @@ var Any = /** @class */ (function (_super) {
     Any.prototype.isSatisfiedBy = function (candidate) {
         for (var _i = 0, _a = this.specs; _i < _a.length; _i++) {
             var currentSpec = _a[_i];
-            if (currentSpec.isSatisfiedBy(candidate))
+            if (currentSpec.isSatisfiedBy(candidate)) {
                 return true;
+            }
         }
-        return this.specs.length == 0;
+        return 0 == this.specs.length;
     };
     Any.prototype.toString = function () {
         return '(' + this.specs.join(' or ') + ')';
@@ -422,13 +423,14 @@ var All = /** @class */ (function (_super) {
     All.prototype.isSatisfiedBy = function (candidate) {
         for (var _i = 0, _a = this.specs; _i < _a.length; _i++) {
             var currentSpec = _a[_i];
-            if (!currentSpec.isSatisfiedBy(candidate))
+            if (!currentSpec.isSatisfiedBy(candidate)) {
                 return false;
+            }
         }
         return true;
     };
     All.prototype.toString = function () {
-        return '(' + this.specs.join(' and ') + ')';
+        return '(' + this.specs.join(', ') + ')';
     };
     return All;
 }(Composite));

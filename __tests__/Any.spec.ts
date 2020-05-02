@@ -1,4 +1,4 @@
-import {Any, Spec} from "..";
+import { Any, Spec } from "..";
 
 describe( 'Any', () => {
 	const createFakeUnsatisfiedSpec: () => Spec<any, any> = () => ({
