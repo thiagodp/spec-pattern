@@ -3,7 +3,7 @@
 Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Specification_pattern) for JavaScript and TypeScript.
 
 [![npm version](https://badge.fury.io/js/spec-pattern.svg)](https://badge.fury.io/js/spec-pattern)
-[![Build Status](https://travis-ci.org/thiagodp/spec-pattern.svg?branch=master)](https://travis-ci.org/thiagodp/spec-pattern) [![Greenkeeper badge](https://badges.greenkeeper.io/thiagodp/spec-pattern.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/thiagodp/spec-pattern.svg?branch=master)](https://travis-ci.org/thiagodp/spec-pattern) 
 
 > Build complex filters and rules easily.
 
