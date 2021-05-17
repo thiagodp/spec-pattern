@@ -12,6 +12,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var Composite = /** @class */ (function () {
     function Composite() {
@@ -34,6 +41,7 @@ var Composite = /** @class */ (function () {
     return Composite;
 }());
 exports.Composite = Composite;
+// ---------------------------------------------------------------------------
 var And = /** @class */ (function (_super) {
     __extends(And, _super);
     function And(_left, _right) {
@@ -51,6 +59,12 @@ var And = /** @class */ (function (_super) {
     return And;
 }(Composite));
 exports.And = And;
+// Syntax sugar
+function and(left, right) {
+    return new And(left, right);
+}
+exports.and = and;
+// ---------------------------------------------------------------------------
 var AndNot = /** @class */ (function (_super) {
     __extends(AndNot, _super);
     function AndNot(_left, _right) {
@@ -68,6 +82,12 @@ var AndNot = /** @class */ (function (_super) {
     return AndNot;
 }(Composite));
 exports.AndNot = AndNot;
+// Syntax sugar
+function andNot(left, right) {
+    return new AndNot(left, right);
+}
+exports.andNot = andNot;
+// ---------------------------------------------------------------------------
 var Or = /** @class */ (function (_super) {
     __extends(Or, _super);
     function Or(_left, _right) {
@@ -85,6 +105,12 @@ var Or = /** @class */ (function (_super) {
     return Or;
 }(Composite));
 exports.Or = Or;
+// Syntax sugar
+function or(left, right) {
+    return new Or(left, right);
+}
+exports.or = or;
+// ---------------------------------------------------------------------------
 var OrNot = /** @class */ (function (_super) {
     __extends(OrNot, _super);
     function OrNot(_left, _right) {
@@ -102,6 +128,12 @@ var OrNot = /** @class */ (function (_super) {
     return OrNot;
 }(Composite));
 exports.OrNot = OrNot;
+// Syntax sugar
+function orNot(left, right) {
+    return new OrNot(left, right);
+}
+exports.orNot = orNot;
+// ---------------------------------------------------------------------------
 var Not = /** @class */ (function (_super) {
     __extends(Not, _super);
     function Not(_other) {
@@ -118,6 +150,12 @@ var Not = /** @class */ (function (_super) {
     return Not;
 }(Composite));
 exports.Not = Not;
+// Syntax sugar
+function not(other) {
+    return new Not(other);
+}
+exports.not = not;
+// ---------------------------------------------------------------------------
 var EqualTo = /** @class */ (function (_super) {
     __extends(EqualTo, _super);
     function EqualTo(_value) {
@@ -134,6 +172,12 @@ var EqualTo = /** @class */ (function (_super) {
     return EqualTo;
 }(Composite));
 exports.EqualTo = EqualTo;
+// Syntax sugar
+function equalTo(value) {
+    return new EqualTo(value);
+}
+exports.equalTo = equalTo;
+// ---------------------------------------------------------------------------
 var StrictEqualTo = /** @class */ (function (_super) {
     __extends(StrictEqualTo, _super);
     function StrictEqualTo(_value) {
@@ -150,6 +194,12 @@ var StrictEqualTo = /** @class */ (function (_super) {
     return StrictEqualTo;
 }(Composite));
 exports.StrictEqualTo = StrictEqualTo;
+// Syntax sugar
+function strictEqualTo(value) {
+    return new StrictEqualTo(value);
+}
+exports.strictEqualTo = strictEqualTo;
+// ---------------------------------------------------------------------------
 var SameValueAs = /** @class */ (function (_super) {
     __extends(SameValueAs, _super);
     function SameValueAs(_value) {
@@ -172,6 +222,12 @@ var SameValueAs = /** @class */ (function (_super) {
     return SameValueAs;
 }(Composite));
 exports.SameValueAs = SameValueAs;
+// Syntax sugar
+function sameValueAs(value) {
+    return new SameValueAs(value);
+}
+exports.sameValueAs = sameValueAs;
+// ---------------------------------------------------------------------------
 var SameTypeAs = /** @class */ (function (_super) {
     __extends(SameTypeAs, _super);
     function SameTypeAs(_value) {
@@ -192,6 +248,12 @@ var SameTypeAs = /** @class */ (function (_super) {
     return SameTypeAs;
 }(Composite));
 exports.SameTypeAs = SameTypeAs;
+// Syntax sugar
+function sameTypeAs(value) {
+    return new SameTypeAs(value);
+}
+exports.sameTypeAs = sameTypeAs;
+// ---------------------------------------------------------------------------
 var GreaterThan = /** @class */ (function (_super) {
     __extends(GreaterThan, _super);
     function GreaterThan(_min) {
@@ -208,6 +270,12 @@ var GreaterThan = /** @class */ (function (_super) {
     return GreaterThan;
 }(Composite));
 exports.GreaterThan = GreaterThan;
+// Syntax sugar
+function greaterThan(min) {
+    return new GreaterThan(min);
+}
+exports.greaterThan = greaterThan;
+// ---------------------------------------------------------------------------
 var GreaterThanOrEqualTo = /** @class */ (function (_super) {
     __extends(GreaterThanOrEqualTo, _super);
     function GreaterThanOrEqualTo(_min) {
@@ -224,6 +292,12 @@ var GreaterThanOrEqualTo = /** @class */ (function (_super) {
     return GreaterThanOrEqualTo;
 }(Composite));
 exports.GreaterThanOrEqualTo = GreaterThanOrEqualTo;
+// Syntax sugar
+function greaterThanOrEqualTo(min) {
+    return new GreaterThanOrEqualTo(min);
+}
+exports.greaterThanOrEqualTo = greaterThanOrEqualTo;
+// ---------------------------------------------------------------------------
 var LessThan = /** @class */ (function (_super) {
     __extends(LessThan, _super);
     function LessThan(_max) {
@@ -240,6 +314,12 @@ var LessThan = /** @class */ (function (_super) {
     return LessThan;
 }(Composite));
 exports.LessThan = LessThan;
+// Syntax sugar
+function lessThan(max) {
+    return new LessThan(max);
+}
+exports.lessThan = lessThan;
+// ---------------------------------------------------------------------------
 var LessThanOrEqualTo = /** @class */ (function (_super) {
     __extends(LessThanOrEqualTo, _super);
     function LessThanOrEqualTo(_max) {
@@ -256,6 +336,12 @@ var LessThanOrEqualTo = /** @class */ (function (_super) {
     return LessThanOrEqualTo;
 }(Composite));
 exports.LessThanOrEqualTo = LessThanOrEqualTo;
+// Syntax sugar
+function lessThanOrEqualTo(max) {
+    return new LessThanOrEqualTo(max);
+}
+exports.lessThanOrEqualTo = lessThanOrEqualTo;
+// ---------------------------------------------------------------------------
 var StartsWith = /** @class */ (function (_super) {
     __extends(StartsWith, _super);
     function StartsWith(_value, _ignoreCase) {
@@ -276,6 +362,13 @@ var StartsWith = /** @class */ (function (_super) {
     return StartsWith;
 }(Composite));
 exports.StartsWith = StartsWith;
+// Syntax sugar
+function startsWith(value, ignoreCase) {
+    if (ignoreCase === void 0) { ignoreCase = false; }
+    return new StartsWith(value, ignoreCase);
+}
+exports.startsWith = startsWith;
+// ---------------------------------------------------------------------------
 var EndsWith = /** @class */ (function (_super) {
     __extends(EndsWith, _super);
     function EndsWith(_value, _ignoreCase) {
@@ -296,6 +389,13 @@ var EndsWith = /** @class */ (function (_super) {
     return EndsWith;
 }(Composite));
 exports.EndsWith = EndsWith;
+// Syntax sugar
+function endsWith(value, ignoreCase) {
+    if (ignoreCase === void 0) { ignoreCase = false; }
+    return new EndsWith(value, ignoreCase);
+}
+exports.endsWith = endsWith;
+// ---------------------------------------------------------------------------
 var Contains = /** @class */ (function (_super) {
     __extends(Contains, _super);
     function Contains(_value, _ignoreCase) {
@@ -316,6 +416,13 @@ var Contains = /** @class */ (function (_super) {
     return Contains;
 }(Composite));
 exports.Contains = Contains;
+// Syntax sugar
+function contains(value, ignoreCase) {
+    if (ignoreCase === void 0) { ignoreCase = false; }
+    return new Contains(value, ignoreCase);
+}
+exports.contains = contains;
+// ---------------------------------------------------------------------------
 var In = /** @class */ (function (_super) {
     __extends(In, _super);
     function In(_values) {
@@ -332,6 +439,12 @@ var In = /** @class */ (function (_super) {
     return In;
 }(Composite));
 exports.In = In;
+// Syntax sugar
+function isIn(values) {
+    return new In(values);
+}
+exports.isIn = isIn;
+// ---------------------------------------------------------------------------
 var Between = /** @class */ (function (_super) {
     __extends(Between, _super);
     function Between(_min, _max) {
@@ -349,6 +462,12 @@ var Between = /** @class */ (function (_super) {
     return Between;
 }(Composite));
 exports.Between = Between;
+// Syntax sugar
+function between(min, max) {
+    return new Between(min, max);
+}
+exports.between = between;
+// ---------------------------------------------------------------------------
 var LengthBetween = /** @class */ (function (_super) {
     __extends(LengthBetween, _super);
     function LengthBetween(_min, _max) {
@@ -367,6 +486,12 @@ var LengthBetween = /** @class */ (function (_super) {
     return LengthBetween;
 }(Composite));
 exports.LengthBetween = LengthBetween;
+// Syntax sugar
+function lengthBetween(min, max) {
+    return new LengthBetween(min, max);
+}
+exports.lengthBetween = lengthBetween;
+// ---------------------------------------------------------------------------
 var Empty = /** @class */ (function (_super) {
     __extends(Empty, _super);
     function Empty() {
@@ -383,6 +508,12 @@ var Empty = /** @class */ (function (_super) {
     return Empty;
 }(Composite));
 exports.Empty = Empty;
+// Syntax sugar
+function empty() {
+    return new Empty();
+}
+exports.empty = empty;
+// ---------------------------------------------------------------------------
 var Matches = /** @class */ (function (_super) {
     __extends(Matches, _super);
     function Matches(_regex) {
@@ -399,6 +530,12 @@ var Matches = /** @class */ (function (_super) {
     return Matches;
 }(Composite));
 exports.Matches = Matches;
+// Syntax sugar
+function matches(regex) {
+    return new Matches(regex);
+}
+exports.matches = matches;
+// ---------------------------------------------------------------------------
 var Any = /** @class */ (function (_super) {
     __extends(Any, _super);
     function Any() {
@@ -425,6 +562,16 @@ var Any = /** @class */ (function (_super) {
     return Any;
 }(Composite));
 exports.Any = Any;
+// Syntax sugar
+function any() {
+    var specs = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        specs[_i] = arguments[_i];
+    }
+    return new (Any.bind.apply(Any, __spreadArrays([void 0], specs)))();
+}
+exports.any = any;
+// ---------------------------------------------------------------------------
 var All = /** @class */ (function (_super) {
     __extends(All, _super);
     function All() {
@@ -451,3 +598,12 @@ var All = /** @class */ (function (_super) {
     return All;
 }(Composite));
 exports.All = All;
+// Syntax sugar
+function all() {
+    var specs = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        specs[_i] = arguments[_i];
+    }
+    return new (All.bind.apply(All, __spreadArrays([void 0], specs)))();
+}
+exports.all = all;

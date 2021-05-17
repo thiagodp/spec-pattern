@@ -1,4 +1,4 @@
-import { LessThanOrEqualTo } from "..";
+import { lessThanOrEqualTo, LessThanOrEqualTo, sameTypeAs } from "..";
 
 describe( 'LessThanOrEqualTo', () => {
 
@@ -26,6 +26,12 @@ describe( 'LessThanOrEqualTo', () => {
             ).toBeFalsy();
         } );
 
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = lessThanOrEqualTo( 1 );
+        const noSugar = new LessThanOrEqualTo( 1 );
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

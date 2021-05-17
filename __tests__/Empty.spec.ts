@@ -1,4 +1,4 @@
-import { Empty } from "..";
+import { Empty, empty, sameTypeAs } from '..';
 
 describe( 'Empty', () => {
 
@@ -36,6 +36,12 @@ describe( 'Empty', () => {
             expect( ( new Empty() ).isSatisfiedBy( [ 1 ] ) ).toBeFalsy();
         } );
 
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = empty( );
+        const noSugar = new Empty();
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

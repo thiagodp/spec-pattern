@@ -1,4 +1,4 @@
-import { Matches } from "..";
+import { matches, Matches, sameTypeAs } from "..";
 
 describe( 'Matches', () => {
 
@@ -20,6 +20,12 @@ describe( 'Matches', () => {
             ).toBeFalsy();
         } );
 
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = matches( /^foo$/ );
+        const noSugar = new Matches( /^foo$/ );
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

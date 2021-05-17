@@ -1,4 +1,4 @@
-import { GreaterThanOrEqualTo } from "..";
+import { greaterThanOrEqualTo, GreaterThanOrEqualTo, sameTypeAs } from "..";
 
 describe( 'GreaterThanOrEqualTo', () => {
 
@@ -26,6 +26,12 @@ describe( 'GreaterThanOrEqualTo', () => {
             ).toBeFalsy();
         } );
 
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = greaterThanOrEqualTo( 1 );
+        const noSugar = new GreaterThanOrEqualTo( 1 );
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

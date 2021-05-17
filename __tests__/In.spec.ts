@@ -1,4 +1,4 @@
-import { In } from "..";
+import { In, isIn, sameTypeAs } from "..";
 
 describe( 'In', () => {
 
@@ -20,6 +20,12 @@ describe( 'In', () => {
             ).toBeFalsy();
         } );
 
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = isIn( [ 1 , 2, 3 ] );
+        const noSugar = new In( [ 1, 2, 3 ] );
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

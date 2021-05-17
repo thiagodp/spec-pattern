@@ -1,4 +1,4 @@
-import { Any, Spec } from "..";
+import { Any, any, sameTypeAs, Spec } from '..';
 
 describe( 'Any', () => {
 	const createFakeUnsatisfiedSpec: () => Spec<any, any> = () => ({
@@ -42,5 +42,17 @@ describe( 'Any', () => {
 		} );
 
 	} );
+
+    it( 'sugar works', () => {
+		const sugar = any(
+			createFakeSatisfiedSpec(),
+			createFakeUnsatisfiedSpec()
+		);
+		const noSugar = new Any(
+			createFakeSatisfiedSpec(),
+			createFakeUnsatisfiedSpec()
+		);
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
+    } );
 
 } );

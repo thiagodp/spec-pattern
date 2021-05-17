@@ -1,4 +1,4 @@
-import { All, Spec } from "..";
+import { All, all, sameTypeAs, Spec } from '..';
 
 describe( 'All', () => {
 
@@ -45,5 +45,17 @@ describe( 'All', () => {
 		} );
 
 	} );
+
+    it( 'sugar works', () => {
+		const sugar = all(
+			createFakeSatisfiedSpec(),
+			createFakeUnsatisfiedSpec()
+		);
+		const noSugar = new All(
+			createFakeSatisfiedSpec(),
+			createFakeUnsatisfiedSpec()
+		);
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
+    } );
 
 } );

@@ -42,6 +42,7 @@ export abstract class Composite< C, T > implements Spec< C, T > {
 
 }
 
+// ---------------------------------------------------------------------------
 
 export class And< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -59,6 +60,12 @@ export class And< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function and< C, T extends C | unknown >( left: Spec< C, T >, right: Spec< C, T > ) {
+    return new And< C, T >( left, right );
+}
+
+// ---------------------------------------------------------------------------
 
 export class AndNot< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -76,6 +83,12 @@ export class AndNot< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function andNot< C, T extends C | unknown >( left: Spec< C, T >, right: Spec< C, T > ) {
+    return new AndNot< C, T >( left, right );
+}
+
+// ---------------------------------------------------------------------------
 
 export class Or< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -93,6 +106,12 @@ export class Or< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function or< C, T extends C | unknown >( left: Spec< C, T >, right: Spec< C, T > ) {
+    return new Or< C, T >( left, right );
+}
+
+// ---------------------------------------------------------------------------
 
 export class OrNot< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -110,6 +129,12 @@ export class OrNot< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function orNot< C, T extends C | unknown >( left: Spec< C, T >, right: Spec< C, T > ) {
+    return new OrNot< C, T >( left, right );
+}
+
+// ---------------------------------------------------------------------------
 
 export class Not< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -127,6 +152,12 @@ export class Not< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function not< C, T extends C | unknown >( other: Spec< C, T > ) {
+    return new Not< C, T >( other );
+}
+
+// ---------------------------------------------------------------------------
 
 export class EqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -144,6 +175,13 @@ export class EqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function equalTo< C, T extends C | unknown >( value: T ) {
+    return new EqualTo< C, T >( value );
+}
+
+// ---------------------------------------------------------------------------
+
 export class StrictEqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _value: T ) {
@@ -159,6 +197,13 @@ export class StrictEqualTo< C, T extends C | unknown > extends Composite< C, T >
     }
 
 }
+
+// Syntax sugar
+export function strictEqualTo< C, T extends C | unknown >( value: T ) {
+    return new StrictEqualTo< C, T >( value );
+}
+
+// ---------------------------------------------------------------------------
 
 export class SameValueAs< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -184,6 +229,12 @@ export class SameValueAs< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function sameValueAs< C, T extends C | unknown >( value: T ) {
+    return new SameValueAs< C, T >( value );
+}
+
+// ---------------------------------------------------------------------------
 
 export class SameTypeAs< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -208,6 +259,12 @@ export class SameTypeAs< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function sameTypeAs< C, T extends C | unknown >( value: T ) {
+    return new SameTypeAs< C, T >( value );
+}
+
+// ---------------------------------------------------------------------------
 
 export class GreaterThan< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -225,6 +282,12 @@ export class GreaterThan< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function greaterThan< C, T extends C | unknown >( min: T ) {
+    return new GreaterThan< C, T >( min );
+}
+
+// ---------------------------------------------------------------------------
 
 export class GreaterThanOrEqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -242,6 +305,12 @@ export class GreaterThanOrEqualTo< C, T extends C | unknown > extends Composite<
 
 }
 
+// Syntax sugar
+export function greaterThanOrEqualTo< C, T extends C | unknown >( min: T ) {
+    return new GreaterThanOrEqualTo< C, T >( min );
+}
+
+// ---------------------------------------------------------------------------
 
 export class LessThan< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -259,6 +328,12 @@ export class LessThan< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function lessThan< C, T extends C | unknown >( max: T ) {
+    return new LessThan< C, T >( max );
+}
+
+// ---------------------------------------------------------------------------
 
 export class LessThanOrEqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -276,6 +351,12 @@ export class LessThanOrEqualTo< C, T extends C | unknown > extends Composite< C,
 
 }
 
+// Syntax sugar
+export function lessThanOrEqualTo< C, T extends C | unknown >( max: T ) {
+    return new LessThanOrEqualTo< C, T >( max );
+}
+
+// ---------------------------------------------------------------------------
 
 export class StartsWith< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -295,6 +376,12 @@ export class StartsWith< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function startsWith< C, T extends C | unknown >( value: string, ignoreCase: boolean = false ) {
+    return new StartsWith< C, T >( value, ignoreCase );
+}
+
+// ---------------------------------------------------------------------------
 
 export class EndsWith< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -314,6 +401,12 @@ export class EndsWith< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function endsWith< C, T extends C | unknown >( value: string, ignoreCase: boolean = false ) {
+    return new EndsWith< C, T >( value, ignoreCase );
+}
+
+// ---------------------------------------------------------------------------
 
 export class Contains< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -333,6 +426,12 @@ export class Contains< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function contains< C, T extends C | unknown >( value: string, ignoreCase: boolean = false ) {
+    return new Contains< C, T >( value, ignoreCase );
+}
+
+// ---------------------------------------------------------------------------
 
 export class In< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -350,6 +449,12 @@ export class In< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function isIn< C, T extends C | unknown >( values: T[] ) {
+    return new In< C, T >( values );
+}
+
+// ---------------------------------------------------------------------------
 
 export class Between< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -367,6 +472,12 @@ export class Between< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function between< C, T extends C | unknown >(  min: T, max: T ) {
+    return new Between< C, T >( min, max );
+}
+
+// ---------------------------------------------------------------------------
 
 export class LengthBetween< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -385,6 +496,12 @@ export class LengthBetween< C, T extends C | unknown > extends Composite< C, T >
 
 }
 
+// Syntax sugar
+export function lengthBetween< C, T extends C | unknown >(  min: number, max: number ) {
+    return new LengthBetween< C, T >( min, max );
+}
+
+// ---------------------------------------------------------------------------
 
 export class Empty< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -404,6 +521,12 @@ export class Empty< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function empty< C, T extends C | unknown >() {
+    return new Empty< C, T >();
+}
+
+// ---------------------------------------------------------------------------
 
 export class Matches< C, T extends C | unknown > extends Composite< C, T > {
 
@@ -421,11 +544,18 @@ export class Matches< C, T extends C | unknown > extends Composite< C, T > {
 
 }
 
+// Syntax sugar
+export function matches< C, T extends C | unknown >( regex: RegExp ) {
+    return new Matches< C, T >( regex );
+}
+
+// ---------------------------------------------------------------------------
+
 export class Any< C, T extends C | unknown > extends Composite< C, T > {
 
 	private readonly specs: Spec< C, T >[];
 
-	constructor( ...specs: Spec< C, T >[]) {
+	constructor( ...specs: Spec< C, T >[] ) {
 		super();
 		this.specs = specs;
 	}
@@ -444,11 +574,18 @@ export class Any< C, T extends C | unknown > extends Composite< C, T > {
 	}
 }
 
+// Syntax sugar
+export function any< C, T extends C | unknown >( ...specs: Spec< C, T >[] ) {
+    return new Any< C, T >( ...specs );
+}
+
+// ---------------------------------------------------------------------------
+
 export class All< C, T extends C | unknown > extends Composite< C, T > {
 
 	private readonly specs: Spec< C, T >[];
 
-	constructor( ...specs: Spec< C, T >[]) {
+	constructor( ...specs: Spec< C, T >[] ) {
 		super();
 		this.specs = specs;
 	}
@@ -465,4 +602,9 @@ export class All< C, T extends C | unknown > extends Composite< C, T > {
 	toString(): string {
 		return '(' + this.specs.join( ', ' ) + ')';
 	}
+}
+
+// Syntax sugar
+export function all< C, T extends C | unknown >( ...specs: Spec< C, T >[] ) {
+    return new All< C, T >( ...specs );
 }

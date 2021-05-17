@@ -1,4 +1,4 @@
-import { Contains } from "..";
+import { Contains, contains, sameTypeAs } from '..';
 
 describe( 'Contains', () => {
 
@@ -32,6 +32,12 @@ describe( 'Contains', () => {
             ).toBeFalsy();
         } );
 
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = contains( 'x' );
+        const noSugar = new Contains( 'x' );
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

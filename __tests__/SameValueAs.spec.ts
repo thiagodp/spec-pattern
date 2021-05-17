@@ -1,4 +1,4 @@
-import { SameValueAs } from "..";
+import { SameValueAs, sameValueAs, sameTypeAs } from "..";
 
 describe( 'SameValueAs', () => {
 
@@ -56,6 +56,12 @@ describe( 'SameValueAs', () => {
             ).toBeFalsy();
         } );
 
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = sameValueAs( true );
+        const noSugar = new SameValueAs( true );
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

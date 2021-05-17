@@ -1,4 +1,4 @@
-import { StartsWith } from "..";
+import { sameTypeAs, startsWith, StartsWith } from "..";
 
 describe( 'StartsWith', () => {
 
@@ -32,6 +32,12 @@ describe( 'StartsWith', () => {
             ).toBeFalsy();
         } );
 
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = startsWith( 'h' );
+        const noSugar = new StartsWith( 'h' );
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

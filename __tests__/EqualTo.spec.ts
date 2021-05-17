@@ -1,4 +1,4 @@
-import { EqualTo } from "..";
+import { EqualTo, equalTo, sameTypeAs } from '..';
 
 describe( 'EqualTo', () => {
 
@@ -44,6 +44,12 @@ describe( 'EqualTo', () => {
             ).toBeFalsy();
         } );
 
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = equalTo( 1 );
+        const noSugar = new EqualTo( 1 );
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

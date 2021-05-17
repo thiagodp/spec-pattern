@@ -1,4 +1,4 @@
-import { LengthBetween } from "..";
+import { lengthBetween, LengthBetween, sameTypeAs } from "..";
 
 describe( 'LengthBetween', () => {
 
@@ -32,6 +32,12 @@ describe( 'LengthBetween', () => {
             ).toBeFalsy();
         } );
 
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = lengthBetween( 2, 5 );
+        const noSugar = new LengthBetween( 2, 5 );
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

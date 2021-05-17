@@ -1,4 +1,4 @@
-import { EndsWith } from "..";
+import { EndsWith, endsWith, sameTypeAs } from '..';
 
 describe( 'EndsWith', () => {
 
@@ -32,6 +32,12 @@ describe( 'EndsWith', () => {
             ).toBeFalsy();
         } );
 
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = endsWith( 'x' );
+        const noSugar = new EndsWith( 'x' );
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

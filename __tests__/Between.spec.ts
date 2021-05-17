@@ -1,4 +1,4 @@
-import { Between } from "..";
+import { Between, between, sameTypeAs } from '..';
 
 describe( 'Between', () => {
 
@@ -180,6 +180,13 @@ describe( 'Between', () => {
 
         } );
 
+    } );
+
+
+    it( 'sugar works', () => {
+        const sugar = between( -1, 1 );
+        const noSugar = new Between( -1, 1 );
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

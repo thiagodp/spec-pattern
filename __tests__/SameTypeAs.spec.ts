@@ -1,7 +1,8 @@
-import { SameTypeAs } from "..";
+import { sameTypeAs, SameTypeAs } from "..";
 
 class A {}
 class B {}
+class AChild extends A {}
 
 describe( 'SameTypeAs', () => {
 
@@ -35,6 +36,16 @@ describe( 'SameTypeAs', () => {
             expect( ( new SameTypeAs( new A() ) ).isSatisfiedBy( new B() ) ).toBeFalsy();
         } );
 
+        it( 'child classes', () => {
+            expect( ( new SameTypeAs( new A() ) ).isSatisfiedBy( new AChild() ) ).toBeFalsy();
+        } );
+
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = sameTypeAs( true );
+        const noSugar = new SameTypeAs( true );
+        expect( new SameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

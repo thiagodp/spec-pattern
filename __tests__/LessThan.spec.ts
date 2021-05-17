@@ -1,4 +1,4 @@
-import { LessThan } from "..";
+import { lessThan, LessThan, sameTypeAs } from "..";
 
 describe( 'LessThan', () => {
 
@@ -26,6 +26,12 @@ describe( 'LessThan', () => {
             ).toBeFalsy();
         } );
 
+    } );
+
+    it( 'sugar works', () => {
+        const sugar = lessThan( 1 );
+        const noSugar = new LessThan( 1 );
+        expect( sameTypeAs( sugar ).isSatisfiedBy( noSugar ) ).toBeTruthy();
     } );
 
 } );

@@ -15,10 +15,10 @@ Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Spec
 ## Install
 
 ```bash
-$ npm install spec-pattern
+$ npm i spec-pattern
 ```
 
-## Examples
+## Examples without syntax sugar
 
 #### A simple Between rule
  ```js
@@ -86,6 +86,81 @@ console.log( rules.isSatisfiedBy( 'Hello' ) ); // false
 console.log( rules.isSatisfiedBy( 'Howdy' ) ); // true
 console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
 ```
+
+
+## Same examples with syntax sugar
+
+#### A simple Between rule
+ ```js
+import { between } from 'spec-pattern';
+
+let rules = between( 1, 3 );
+
+console.log( rules.isSatisfiedBy( 2 ) ); // true
+```
+
+#### A little more complex Between rule
+ ```js
+import { between } from 'spec-pattern';
+
+let rules = between( 1, 3 )
+    .or( between( 6, 9 ) );
+
+console.log( rules.isSatisfiedBy( 2 ) ); // true
+console.log( rules.isSatisfiedBy( 7 ) ); // true
+console.log( rules.isSatisfiedBy( 5 ) ); // false
+```
+
+#### Composing rules
+ ```js
+import { between, isIn, greaterThan } from 'spec-pattern';
+
+let rules = between( 1, 3 )
+    .or( between( 6, 9 ) )
+    .or( isIn( [ 11, 25, 31 ] ) )
+    .or( greaterThan( 50 ) );
+
+console.log( rules.isSatisfiedBy( 2 ) ); // true
+console.log( rules.isSatisfiedBy( 7 ) ); // true
+console.log( rules.isSatisfiedBy( 5 ) ); // false
+console.log( rules.isSatisfiedBy( 11 ) ); // true
+console.log( rules.isSatisfiedBy( 50 ) ); // false
+console.log( rules.isSatisfiedBy( 51 ) ); // true
+
+// Printable !
+console.log( rules.toString() );
+// (((between (1, 3) or between (6, 9)) or in [11, 25, 31]) or greater than 50)
+```
+
+#### Not only numbers
+```js
+import { startsWith, contains } from 'spec-pattern';
+
+let rules = startsWith( 'Hello' )
+    .andNot( contains( 'world' ) );
+
+console.log( rules.isSatisfiedBy( 'Hello Bob' ) ); // true
+console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
+```
+
+```js
+import { lengthBetween, equalTo } from 'spec-pattern';
+
+let rules = lengthBetween( 2, 5 )
+    .andNot( equalTo( 'Hello' ) );
+
+console.log( rules.isSatisfiedBy( '' ) ); // false
+console.log( rules.isSatisfiedBy( 'Hi' ) ); // true
+console.log( rules.isSatisfiedBy( 'Hello' ) ); // false
+console.log( rules.isSatisfiedBy( 'Howdy' ) ); // true
+console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
+```
+
+
+## Available sugar
+
+- Every class has a sugar with its name in camelCase, _e.g._ `SameValueAs`' sugar is `sameValueAs`. The exception is `In`, its sugar is `isIn` (since `in` is a reserved word).
+
 
 ## Available classes
 
