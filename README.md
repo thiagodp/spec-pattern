@@ -1,8 +1,13 @@
+[![npm (tag)](https://img.shields.io/npm/v/spec-pattern?color=green&label=NPM&style=for-the-badge)](https://github.com/thiagodp/spec-pattern/releases)
+[![License](https://img.shields.io/npm/l/spec-pattern.svg?style=for-the-badge&color=green)](https://github.com/thiagodp/spec-pattern/blob/master/LICENSE.txt)
+[![npm](https://img.shields.io/npm/dt/spec-pattern?style=for-the-badge&color=green)](https://www.npmjs.com/package/spec-pattern)
+
 # spec-pattern
 
 Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Specification_pattern) for JavaScript and TypeScript.
 
 [![npm version](https://badge.fury.io/js/spec-pattern.svg)](https://badge.fury.io/js/spec-pattern)
+
 [![Build Status](https://travis-ci.org/thiagodp/spec-pattern.svg?branch=master)](https://travis-ci.org/thiagodp/spec-pattern) [![Greenkeeper badge](https://badges.greenkeeper.io/thiagodp/spec-pattern.svg)](https://greenkeeper.io/)
 
 > Build complex filters and rules easily.
