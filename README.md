@@ -6,10 +6,6 @@
 
 Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Specification_pattern) for JavaScript and TypeScript.
 
-[![npm version](https://badge.fury.io/js/spec-pattern.svg)](https://badge.fury.io/js/spec-pattern)
-
-[![Build Status](https://travis-ci.org/thiagodp/spec-pattern.svg?branch=master)](https://travis-ci.org/thiagodp/spec-pattern) [![Greenkeeper badge](https://badges.greenkeeper.io/thiagodp/spec-pattern.svg)](https://greenkeeper.io/)
-
 > Build complex filters and rules easily.
 
 - No external dependencies.
@@ -17,13 +13,15 @@ Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Spec
 - It uses [semantic versioning](https://semver.org).
 - *Forks are welcome!* See [how to contribute](contributing.md).
 
-## Install
+## Installation
 
 ```bash
 $ npm i spec-pattern
 ```
 
-## Examples without syntax sugar
+## Usage
+
+### Without syntax sugar
 
 #### A simple Between rule
  ```js
@@ -93,7 +91,7 @@ console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
 ```
 
 
-## Same examples with syntax sugar
+### With syntax sugar
 
 #### A simple Between rule
  ```js

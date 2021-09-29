@@ -41,6 +41,6 @@
     "jest": "^25.5.4",
     "rimraf": "^3.0.2",
     "ts-jest": "^25.5.1",
-    "typescript": "^3.9.9"
+    "typescript": "^3.9.10"
   }
 }
