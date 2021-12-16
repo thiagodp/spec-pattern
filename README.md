@@ -10,7 +10,7 @@ Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Spec
 
 - No external dependencies.
 - Fully [tested](https://github.com/thiagodp/spec-pattern/blob/master/__tests__/).
-- It uses [semantic versioning](https://semver.org).
+- [Semantic versioning](https://semver.org).
 - *Forks are welcome!* See [how to contribute](contributing.md).
 
 ## Installation
@@ -30,7 +30,7 @@ import { Between } from 'spec-pattern';
 const rating = new Between( 1, 5 );
 
 console.log( rating.isSatisfiedBy( 3 ) ); // true
-console.log( rating.isSatisfiedBy( 0 ) ); // true
+console.log( rating.isSatisfiedBy( 0 ) ); // false
 ```
 
 
@@ -101,7 +101,7 @@ import { between } from 'spec-pattern';
 const rating = between( 1, 5 );
 
 console.log( rating.isSatisfiedBy( 3 ) ); // true
-console.log( rating.isSatisfiedBy( 0 ) ); // true
+console.log( rating.isSatisfiedBy( 0 ) ); // false
 ```
 
 #### A little more complex Between rule
