@@ -46,6 +46,22 @@ export declare class OrNot<C, T extends C | unknown> extends Composite<C, T> {
     toString(): string;
 }
 export declare function orNot<C, T extends C | unknown>(left: Spec<C, T>, right: Spec<C, T>): OrNot<C, T>;
+export declare class Xor<C, T extends C | unknown> extends Composite<C, T> {
+    private _left;
+    private _right;
+    constructor(_left: Spec<C, T>, _right: Spec<C, T>);
+    isSatisfiedBy(candidate: C | T): boolean;
+    toString(): string;
+}
+export declare function xor<C, T extends C | unknown>(left: Spec<C, T>, right: Spec<C, T>): Xor<C, T>;
+export declare class XorNot<C, T extends C | unknown> extends Composite<C, T> {
+    private _left;
+    private _right;
+    constructor(_left: Spec<C, T>, _right: Spec<C, T>);
+    isSatisfiedBy(candidate: C | T): boolean;
+    toString(): string;
+}
+export declare function xorNot<C, T extends C | unknown>(left: Spec<C, T>, right: Spec<C, T>): XorNot<C, T>;
 export declare class Not<C, T extends C | unknown> extends Composite<C, T> {
     private _other;
     constructor(_other: Spec<C, T>);

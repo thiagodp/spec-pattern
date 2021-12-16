@@ -136,6 +136,55 @@ export function orNot< C, T extends C | unknown >( left: Spec< C, T >, right: Sp
 
 // ---------------------------------------------------------------------------
 
+// XOR comparison hack
+function _xor( a: any, b: any ): boolean {
+	return !a != !b;
+}
+
+export class Xor< C, T extends C | unknown > extends Composite< C, T > {
+
+    constructor( private _left: Spec< C, T >, private _right: Spec< C, T > ) {
+        super();
+    }
+
+    isSatisfiedBy( candidate: C | T ): boolean {
+        return _xor( this._left.isSatisfiedBy( candidate ), this._right.isSatisfiedBy( candidate ) );
+    }
+
+    toString(): string {
+        return '(' + this._left.toString() + ' xor ' + this._right.toString() + ')';
+    }
+
+}
+
+// Syntax sugar
+export function xor< C, T extends C | unknown >( left: Spec< C, T >, right: Spec< C, T > ) {
+    return new Xor< C, T >( left, right );
+}
+
+// ---------------------------------------------------------------------------
+export class XorNot< C, T extends C | unknown > extends Composite< C, T > {
+
+    constructor( private _left: Spec< C, T >, private _right: Spec< C, T > ) {
+        super();
+    }
+
+    isSatisfiedBy( candidate: C | T ): boolean {
+        return _xor( this._left.isSatisfiedBy( candidate ), ! this._right.isSatisfiedBy( candidate ) );
+    }
+
+    toString(): string {
+        return '(' + this._left.toString() + ' xor not ' + this._right.toString() + ')';
+    }
+
+}
+
+// Syntax sugar
+export function xorNot< C, T extends C | unknown >( left: Spec< C, T >, right: Spec< C, T > ) {
+    return new XorNot< C, T >( left, right );
+}
+
+// ---------------------------------------------------------------------------
 export class Not< C, T extends C | unknown > extends Composite< C, T > {
 
     constructor( private _other: Spec< C, T > ) {

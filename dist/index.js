@@ -20,7 +20,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.all = exports.All = exports.any = exports.Any = exports.matches = exports.Matches = exports.empty = exports.Empty = exports.lengthBetween = exports.LengthBetween = exports.between = exports.Between = exports.isIn = exports.In = exports.contains = exports.Contains = exports.endsWith = exports.EndsWith = exports.startsWith = exports.StartsWith = exports.lessThanOrEqualTo = exports.LessThanOrEqualTo = exports.lessThan = exports.LessThan = exports.greaterThanOrEqualTo = exports.GreaterThanOrEqualTo = exports.greaterThan = exports.GreaterThan = exports.sameTypeAs = exports.SameTypeAs = exports.sameValueAs = exports.SameValueAs = exports.strictEqualTo = exports.StrictEqualTo = exports.equalTo = exports.EqualTo = exports.not = exports.Not = exports.orNot = exports.OrNot = exports.or = exports.Or = exports.andNot = exports.AndNot = exports.and = exports.And = exports.Composite = void 0;
+exports.all = exports.All = exports.any = exports.Any = exports.matches = exports.Matches = exports.empty = exports.Empty = exports.lengthBetween = exports.LengthBetween = exports.between = exports.Between = exports.isIn = exports.In = exports.contains = exports.Contains = exports.endsWith = exports.EndsWith = exports.startsWith = exports.StartsWith = exports.lessThanOrEqualTo = exports.LessThanOrEqualTo = exports.lessThan = exports.LessThan = exports.greaterThanOrEqualTo = exports.GreaterThanOrEqualTo = exports.greaterThan = exports.GreaterThan = exports.sameTypeAs = exports.SameTypeAs = exports.sameValueAs = exports.SameValueAs = exports.strictEqualTo = exports.StrictEqualTo = exports.equalTo = exports.EqualTo = exports.not = exports.Not = exports.xorNot = exports.XorNot = exports.xor = exports.Xor = exports.orNot = exports.OrNot = exports.or = exports.Or = exports.andNot = exports.AndNot = exports.and = exports.And = exports.Composite = void 0;
 var Composite = /** @class */ (function () {
     function Composite() {
     }
@@ -134,6 +134,56 @@ function orNot(left, right) {
     return new OrNot(left, right);
 }
 exports.orNot = orNot;
+// ---------------------------------------------------------------------------
+// XOR comparison hack
+function _xor(a, b) {
+    return !a != !b;
+}
+var Xor = /** @class */ (function (_super) {
+    __extends(Xor, _super);
+    function Xor(_left, _right) {
+        var _this = _super.call(this) || this;
+        _this._left = _left;
+        _this._right = _right;
+        return _this;
+    }
+    Xor.prototype.isSatisfiedBy = function (candidate) {
+        return _xor(this._left.isSatisfiedBy(candidate), this._right.isSatisfiedBy(candidate));
+    };
+    Xor.prototype.toString = function () {
+        return '(' + this._left.toString() + ' xor ' + this._right.toString() + ')';
+    };
+    return Xor;
+}(Composite));
+exports.Xor = Xor;
+// Syntax sugar
+function xor(left, right) {
+    return new Xor(left, right);
+}
+exports.xor = xor;
+// ---------------------------------------------------------------------------
+var XorNot = /** @class */ (function (_super) {
+    __extends(XorNot, _super);
+    function XorNot(_left, _right) {
+        var _this = _super.call(this) || this;
+        _this._left = _left;
+        _this._right = _right;
+        return _this;
+    }
+    XorNot.prototype.isSatisfiedBy = function (candidate) {
+        return _xor(this._left.isSatisfiedBy(candidate), !this._right.isSatisfiedBy(candidate));
+    };
+    XorNot.prototype.toString = function () {
+        return '(' + this._left.toString() + ' xor not ' + this._right.toString() + ')';
+    };
+    return XorNot;
+}(Composite));
+exports.XorNot = XorNot;
+// Syntax sugar
+function xorNot(left, right) {
+    return new XorNot(left, right);
+}
+exports.xorNot = xorNot;
 // ---------------------------------------------------------------------------
 var Not = /** @class */ (function (_super) {
     __extends(Not, _super);
