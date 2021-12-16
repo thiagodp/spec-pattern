@@ -36,6 +36,12 @@ var Composite = /** @class */ (function () {
     Composite.prototype.orNot = function (other) {
         return new OrNot(this, other);
     };
+    Composite.prototype.xor = function (other) {
+        return new Xor(this, other);
+    };
+    Composite.prototype.xorNot = function (other) {
+        return new XorNot(this, other);
+    };
     Composite.prototype.not = function () {
         return new Not(this);
     };

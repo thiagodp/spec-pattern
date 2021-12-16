@@ -4,6 +4,8 @@ export interface Spec<C, T extends C | unknown> {
     andNot(other: Spec<C, T>): Spec<C, T>;
     or(other: Spec<C, T>): Spec<C, T>;
     orNot(other: Spec<C, T>): Spec<C, T>;
+    xor(other: Spec<C, T>): Spec<C, T>;
+    xorNot(other: Spec<C, T>): Spec<C, T>;
     not(): Spec<C, T>;
 }
 export declare abstract class Composite<C, T> implements Spec<C, T> {
@@ -12,6 +14,8 @@ export declare abstract class Composite<C, T> implements Spec<C, T> {
     andNot(other: Spec<C, T>): Spec<C, T>;
     or(other: Spec<C, T>): Spec<C, T>;
     orNot(other: Spec<C, T>): Spec<C, T>;
+    xor(other: Spec<C, T>): Spec<C, T>;
+    xorNot(other: Spec<C, T>): Spec<C, T>;
     not(): Spec<C, T>;
 }
 export declare class And<C, T extends C | unknown> extends Composite<C, T> {

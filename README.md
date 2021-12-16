@@ -27,9 +27,10 @@ $ npm i spec-pattern
  ```js
 import { Between } from 'spec-pattern';
 
-let rules = new Between( 1, 3 );
+const rating = new Between( 1, 5 );
 
-console.log( rules.isSatisfiedBy( 2 ) ); // true
+console.log( rating.isSatisfiedBy( 3 ) ); // true
+console.log( rating.isSatisfiedBy( 0 ) ); // true
 ```
 
 
@@ -37,32 +38,32 @@ console.log( rules.isSatisfiedBy( 2 ) ); // true
  ```js
 import { Between } from 'spec-pattern';
 
-let rules = new Between( 1, 3 )
-    .or( new Between( 6, 9 ) );
+const desiredAgesToAnswerSurvey = new Between( 16, 21 )
+	.or( new Between( 65, 120 ) );
 
-console.log( rules.isSatisfiedBy( 2 ) ); // true
-console.log( rules.isSatisfiedBy( 7 ) ); // true
-console.log( rules.isSatisfiedBy( 5 ) ); // false
+console.log( desiredAgesToAnswerSurvey.isSatisfiedBy( 18 ) ); // true
+console.log( desiredAgesToAnswerSurvey.isSatisfiedBy( 70 ) ); // true
+console.log( desiredAgesToAnswerSurvey.isSatisfiedBy( 5 ) ); // false
 ```
 
 #### Composing rules
  ```js
 import { Between, In, GreaterThan } from 'spec-pattern';
 
-let rules = new Between( 1, 3 )
+const someCrazyRule = new Between( 1, 3 )
     .or( new Between( 6, 9 ) )
     .or( new In( [ 11, 25, 31 ] ) )
     .or( new GreaterThan( 50 ) );
 
-console.log( rules.isSatisfiedBy( 2 ) ); // true
-console.log( rules.isSatisfiedBy( 7 ) ); // true
-console.log( rules.isSatisfiedBy( 5 ) ); // false
-console.log( rules.isSatisfiedBy( 11 ) ); // true
-console.log( rules.isSatisfiedBy( 50 ) ); // false
-console.log( rules.isSatisfiedBy( 51 ) ); // true
+console.log( someCrazyRule.isSatisfiedBy( 2 ) ); // true
+console.log( someCrazyRule.isSatisfiedBy( 7 ) ); // true
+console.log( someCrazyRule.isSatisfiedBy( 5 ) ); // false
+console.log( someCrazyRule.isSatisfiedBy( 11 ) ); // true
+console.log( someCrazyRule.isSatisfiedBy( 50 ) ); // false
+console.log( someCrazyRule.isSatisfiedBy( 51 ) ); // true
 
 // Printable !
-console.log( rules.toString() );
+console.log( someCrazyRule.toString() );
 // (((between (1, 3) or between (6, 9)) or in [11, 25, 31]) or greater than 50)
 ```
 
@@ -70,24 +71,24 @@ console.log( rules.toString() );
 ```js
 import { StartsWith, Contains } from 'spec-pattern';
 
-let rules = new StartsWith( 'Hello' )
+const helloWithoutWorld = new StartsWith( 'Hello' )
     .andNot( new Contains( 'world' ) );
 
-console.log( rules.isSatisfiedBy( 'Hello Bob' ) ); // true
-console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
+console.log( helloWithoutWorld.isSatisfiedBy( 'Hello Bob' ) ); // true
+console.log( helloWithoutWorld.isSatisfiedBy( 'Hello world' ) ); // false
 ```
 
 ```js
 import { LengthBetween, EqualTo } from 'spec-pattern';
 
-let rules = new LengthBetween( 2, 5 )
+const crazyText = new LengthBetween( 2, 5 )
     .andNot( new EqualTo( 'Hello' ) );
 
-console.log( rules.isSatisfiedBy( '' ) ); // false
-console.log( rules.isSatisfiedBy( 'Hi' ) ); // true
-console.log( rules.isSatisfiedBy( 'Hello' ) ); // false
-console.log( rules.isSatisfiedBy( 'Howdy' ) ); // true
-console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
+console.log( crazyText.isSatisfiedBy( '' ) ); // false
+console.log( crazyText.isSatisfiedBy( 'Hi' ) ); // true
+console.log( crazyText.isSatisfiedBy( 'Hello' ) ); // false
+console.log( crazyText.isSatisfiedBy( 'Howdy' ) ); // true
+console.log( crazyText.isSatisfiedBy( 'Hello world' ) ); // false
 ```
 
 
@@ -97,41 +98,42 @@ console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
  ```js
 import { between } from 'spec-pattern';
 
-let rules = between( 1, 3 );
+const rating = between( 1, 5 );
 
-console.log( rules.isSatisfiedBy( 2 ) ); // true
+console.log( rating.isSatisfiedBy( 3 ) ); // true
+console.log( rating.isSatisfiedBy( 0 ) ); // true
 ```
 
 #### A little more complex Between rule
  ```js
 import { between } from 'spec-pattern';
 
-let rules = between( 1, 3 )
-    .or( between( 6, 9 ) );
+const desiredAgesToAnswerSurvey = between( 16, 21 )
+	.or( between( 65, 120 ) );
 
-console.log( rules.isSatisfiedBy( 2 ) ); // true
-console.log( rules.isSatisfiedBy( 7 ) ); // true
-console.log( rules.isSatisfiedBy( 5 ) ); // false
+console.log( desiredAgesToAnswerSurvey.isSatisfiedBy( 18 ) ); // true
+console.log( desiredAgesToAnswerSurvey.isSatisfiedBy( 70 ) ); // true
+console.log( desiredAgesToAnswerSurvey.isSatisfiedBy( 5 ) ); // false
 ```
 
 #### Composing rules
  ```js
 import { between, isIn, greaterThan } from 'spec-pattern';
 
-let rules = between( 1, 3 )
+const someCrazyRule = between( 1, 3 )
     .or( between( 6, 9 ) )
     .or( isIn( [ 11, 25, 31 ] ) )
     .or( greaterThan( 50 ) );
 
-console.log( rules.isSatisfiedBy( 2 ) ); // true
-console.log( rules.isSatisfiedBy( 7 ) ); // true
-console.log( rules.isSatisfiedBy( 5 ) ); // false
-console.log( rules.isSatisfiedBy( 11 ) ); // true
-console.log( rules.isSatisfiedBy( 50 ) ); // false
-console.log( rules.isSatisfiedBy( 51 ) ); // true
+console.log( someCrazyRule.isSatisfiedBy( 2 ) ); // true
+console.log( someCrazyRule.isSatisfiedBy( 7 ) ); // true
+console.log( someCrazyRule.isSatisfiedBy( 5 ) ); // false
+console.log( someCrazyRule.isSatisfiedBy( 11 ) ); // true
+console.log( someCrazyRule.isSatisfiedBy( 50 ) ); // false
+console.log( someCrazyRule.isSatisfiedBy( 51 ) ); // true
 
 // Printable !
-console.log( rules.toString() );
+console.log( someCrazyRule.toString() );
 // (((between (1, 3) or between (6, 9)) or in [11, 25, 31]) or greater than 50)
 ```
 
@@ -139,30 +141,32 @@ console.log( rules.toString() );
 ```js
 import { startsWith, contains } from 'spec-pattern';
 
-let rules = startsWith( 'Hello' )
+const helloWithoutWorld = startsWith( 'Hello' )
     .andNot( contains( 'world' ) );
 
-console.log( rules.isSatisfiedBy( 'Hello Bob' ) ); // true
-console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
+console.log( helloWithoutWorld.isSatisfiedBy( 'Hello Bob' ) ); // true
+console.log( helloWithoutWorld.isSatisfiedBy( 'Hello world' ) ); // false
 ```
 
 ```js
 import { lengthBetween, equalTo } from 'spec-pattern';
 
-let rules = lengthBetween( 2, 5 )
+const crazyText = lengthBetween( 2, 5 )
     .andNot( equalTo( 'Hello' ) );
 
-console.log( rules.isSatisfiedBy( '' ) ); // false
-console.log( rules.isSatisfiedBy( 'Hi' ) ); // true
-console.log( rules.isSatisfiedBy( 'Hello' ) ); // false
-console.log( rules.isSatisfiedBy( 'Howdy' ) ); // true
-console.log( rules.isSatisfiedBy( 'Hello world' ) ); // false
+console.log( crazyText.isSatisfiedBy( '' ) ); // false
+console.log( crazyText.isSatisfiedBy( 'Hi' ) ); // true
+console.log( crazyText.isSatisfiedBy( 'Hello' ) ); // false
+console.log( crazyText.isSatisfiedBy( 'Howdy' ) ); // true
+console.log( crazyText.isSatisfiedBy( 'Hello world' ) ); // false
 ```
 
 
 ## Available sugar
 
-- Every class has a sugar with its name in camelCase, _e.g._ `SameValueAs`' sugar is `sameValueAs`. The exception is `In`, its sugar is `isIn` (since `in` is a reserved word).
+There is a corresponding sugar function for every available class. Sugar functions are always named in _camelCase_.
+For instance, `sameValueAs()` for the class `SameValueAs`.
+The only exception is the class `In`. Since `in` is a reserved word in JavaScript and thus cannot be a function name, the corresponding sugar is `isIn`.
 
 
 ## Available classes
@@ -201,6 +205,10 @@ export interface Spec< C, T extends C | unknown > {
     or( other: Spec< C, T > ): Spec< C, T >;
 
     orNot( other: Spec< C, T > ): Spec< C, T >;
+
+    xor( other: Spec< C, T > ): Spec< C, T >;
+
+    xorNot( other: Spec< C, T > ): Spec< C, T >;
 
     not(): Spec< C, T >;
 

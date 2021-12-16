@@ -11,6 +11,10 @@ export interface Spec< C, T extends C | unknown > {
 
     orNot( other: Spec< C, T > ): Spec< C, T >;
 
+    xor( other: Spec< C, T > ): Spec< C, T >;
+
+    xorNot( other: Spec< C, T > ): Spec< C, T >;
+
     not(): Spec< C, T >;
 
 }
@@ -34,6 +38,14 @@ export abstract class Composite< C, T > implements Spec< C, T > {
 
     orNot( other: Spec< C, T > ): Spec< C, T > {
         return new OrNot< C, T >( this, other );
+    }
+
+    xor( other: Spec< C, T > ): Spec< C, T > {
+        return new Xor< C, T >( this, other );
+    }
+
+    xorNot( other: Spec< C, T > ): Spec< C, T > {
+        return new XorNot< C, T >( this, other );
     }
 
     not(): Spec< C, T > {
