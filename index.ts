@@ -46,7 +46,7 @@ export abstract class Composite< C, T > implements Spec< C, T > {
 
 export class And< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _left: Spec< C, T >, private _right: Spec< C, T > ) {
+    constructor( protected _left: Spec< C, T >, protected _right: Spec< C, T > ) {
         super();
     }
 
@@ -69,7 +69,7 @@ export function and< C, T extends C | unknown >( left: Spec< C, T >, right: Spec
 
 export class AndNot< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _left: Spec< C, T >, private _right: Spec< C, T > ) {
+    constructor( protected _left: Spec< C, T >, protected _right: Spec< C, T > ) {
         super();
     }
 
@@ -92,7 +92,7 @@ export function andNot< C, T extends C | unknown >( left: Spec< C, T >, right: S
 
 export class Or< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _left: Spec< C, T >, private _right: Spec< C, T > ) {
+    constructor( protected _left: Spec< C, T >, protected _right: Spec< C, T > ) {
         super();
     }
 
@@ -115,7 +115,7 @@ export function or< C, T extends C | unknown >( left: Spec< C, T >, right: Spec<
 
 export class OrNot< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _left: Spec< C, T >, private _right: Spec< C, T > ) {
+    constructor( protected _left: Spec< C, T >, protected _right: Spec< C, T > ) {
         super();
     }
 
@@ -143,7 +143,7 @@ function _xor( a: any, b: any ): boolean {
 
 export class Xor< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _left: Spec< C, T >, private _right: Spec< C, T > ) {
+    constructor( protected _left: Spec< C, T >, protected _right: Spec< C, T > ) {
         super();
     }
 
@@ -165,7 +165,7 @@ export function xor< C, T extends C | unknown >( left: Spec< C, T >, right: Spec
 // ---------------------------------------------------------------------------
 export class XorNot< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _left: Spec< C, T >, private _right: Spec< C, T > ) {
+    constructor( protected _left: Spec< C, T >, protected _right: Spec< C, T > ) {
         super();
     }
 
@@ -187,7 +187,7 @@ export function xorNot< C, T extends C | unknown >( left: Spec< C, T >, right: S
 // ---------------------------------------------------------------------------
 export class Not< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _other: Spec< C, T > ) {
+    constructor( protected _other: Spec< C, T > ) {
         super();
     }
 
@@ -210,7 +210,7 @@ export function not< C, T extends C | unknown >( other: Spec< C, T > ) {
 
 export class EqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _value: T ) {
+    constructor( protected _value: T ) {
         super();
     }
 
@@ -233,7 +233,7 @@ export function equalTo< C, T extends C | unknown >( value: T ) {
 
 export class StrictEqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _value: T ) {
+    constructor( protected _value: T ) {
         super();
     }
 
@@ -256,7 +256,7 @@ export function strictEqualTo< C, T extends C | unknown >( value: T ) {
 
 export class SameValueAs< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _value: T ) {
+    constructor( protected _value: T ) {
         super();
     }
 
@@ -287,7 +287,7 @@ export function sameValueAs< C, T extends C | unknown >( value: T ) {
 
 export class SameTypeAs< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _value: T ) {
+    constructor( protected _value: T ) {
         super();
     }
 
@@ -317,7 +317,7 @@ export function sameTypeAs< C, T extends C | unknown >( value: T ) {
 
 export class GreaterThan< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _min: T ) {
+    constructor( protected _min: T ) {
         super();
     }
 
@@ -340,7 +340,7 @@ export function greaterThan< C, T extends C | unknown >( min: T ) {
 
 export class GreaterThanOrEqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _min: T ) {
+    constructor( protected _min: T ) {
         super();
     }
 
@@ -363,7 +363,7 @@ export function greaterThanOrEqualTo< C, T extends C | unknown >( min: T ) {
 
 export class LessThan< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _max: T ) {
+    constructor( protected _max: T ) {
         super();
     }
 
@@ -386,7 +386,7 @@ export function lessThan< C, T extends C | unknown >( max: T ) {
 
 export class LessThanOrEqualTo< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _max: T ) {
+    constructor( protected _max: T ) {
         super();
     }
 
@@ -409,7 +409,7 @@ export function lessThanOrEqualTo< C, T extends C | unknown >( max: T ) {
 
 export class StartsWith< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _value: string, private _ignoreCase: boolean = false ) {
+    constructor( protected _value: string, protected _ignoreCase: boolean = false ) {
         super();
     }
 
@@ -434,7 +434,7 @@ export function startsWith< C, T extends C | unknown >( value: string, ignoreCas
 
 export class EndsWith< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _value: string, private _ignoreCase: boolean = false ) {
+    constructor( protected _value: string, protected _ignoreCase: boolean = false ) {
         super();
     }
 
@@ -459,7 +459,7 @@ export function endsWith< C, T extends C | unknown >( value: string, ignoreCase:
 
 export class Contains< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _value: string, private _ignoreCase: boolean = false ) {
+    constructor( protected _value: string, protected _ignoreCase: boolean = false ) {
         super();
     }
 
@@ -484,7 +484,7 @@ export function contains< C, T extends C | unknown >( value: string, ignoreCase:
 
 export class In< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _values: T[] ) {
+    constructor( protected _values: T[] ) {
         super();
     }
 
@@ -507,7 +507,7 @@ export function isIn< C, T extends C | unknown >( values: T[] ) {
 
 export class Between< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _min: T, private _max: T ) {
+    constructor( protected _min: T, protected _max: T ) {
         super();
     }
 
@@ -530,7 +530,7 @@ export function between< C, T extends C | unknown >(  min: T, max: T ) {
 
 export class LengthBetween< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _min: number, private _max: number ) {
+    constructor( protected _min: number, protected _max: number ) {
         super();
     }
 
@@ -579,7 +579,7 @@ export function empty< C, T extends C | unknown >() {
 
 export class Matches< C, T extends C | unknown > extends Composite< C, T > {
 
-    constructor( private _regex: RegExp ) {
+    constructor( protected _regex: RegExp ) {
         super();
     }
 
@@ -602,7 +602,7 @@ export function matches< C, T extends C | unknown >( regex: RegExp ) {
 
 export class Any< C, T extends C | unknown > extends Composite< C, T > {
 
-	private readonly specs: Spec< C, T >[];
+	protected readonly specs: Spec< C, T >[];
 
 	constructor( ...specs: Spec< C, T >[] ) {
 		super();
@@ -632,7 +632,7 @@ export function any< C, T extends C | unknown >( ...specs: Spec< C, T >[] ) {
 
 export class All< C, T extends C | unknown > extends Composite< C, T > {
 
-	private readonly specs: Spec< C, T >[];
+	protected readonly specs: Spec< C, T >[];
 
 	constructor( ...specs: Spec< C, T >[] ) {
 		super();
