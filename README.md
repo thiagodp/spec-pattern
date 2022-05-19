@@ -8,9 +8,9 @@ Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Spec
 
 > Build complex filters and rules easily.
 
-- No external dependencies.
-- Fully [tested](https://github.com/thiagodp/spec-pattern/blob/master/__tests__/).
-- [Semantic versioning](https://semver.org).
+- No external dependencies;
+- Fully [tested](https://github.com/thiagodp/spec-pattern/blob/master/__tests__/);
+- [Semantic versioning](https://semver.org);
 - *Forks are welcome!* See [how to contribute](contributing.md).
 
 ## Installation
