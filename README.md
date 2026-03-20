@@ -6,7 +6,7 @@
 
 Implementation of the [Specification Pattern](https://en.wikipedia.org/wiki/Specification_pattern) for JavaScript and TypeScript.
 
-> Build complex filters and rules easily.
+> Build complex filters and rules easily
 
 - No external dependencies;
 - Fully [tested](https://github.com/thiagodp/spec-pattern/blob/master/__tests__/);
